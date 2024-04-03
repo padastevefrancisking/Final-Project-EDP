@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace Final_Project_EDP
 {
     public partial class MainMenu : Form
@@ -15,9 +16,18 @@ namespace Final_Project_EDP
         public MainMenu()
         {
             InitializeComponent();
-            Login.BackColor = Color.FromArgb(232, 226, 217);
+            LoginBackground.BackColor = Color.FromArgb(7, 47, 95);
+            LoginInside li = new LoginInside();
+            
+            li.TopLevel = false;
+            LoginBackground.Controls.Add(li);
+            li.BringToFront();
+            li.Show();
         }
 
-
+        private void Exit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
