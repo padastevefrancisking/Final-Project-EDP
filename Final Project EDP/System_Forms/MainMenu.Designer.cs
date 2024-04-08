@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainMenu));
             this.LoginBackground = new Guna.UI.WinForms.GunaPanel();
+            this.LoginPanel = new System.Windows.Forms.Panel();
             this.Exit = new Guna.UI.WinForms.GunaButton();
             this.LoginBackground.SuspendLayout();
             this.SuspendLayout();
@@ -37,12 +38,23 @@
             // LoginBackground
             // 
             this.LoginBackground.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.LoginBackground.Controls.Add(this.LoginPanel);
             this.LoginBackground.Controls.Add(this.Exit);
             this.LoginBackground.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LoginBackground.Location = new System.Drawing.Point(0, 0);
             this.LoginBackground.Name = "LoginBackground";
-            this.LoginBackground.Size = new System.Drawing.Size(949, 644);
+            this.LoginBackground.Size = new System.Drawing.Size(1041, 741);
             this.LoginBackground.TabIndex = 1;
+            // 
+            // LoginPanel
+            // 
+            this.LoginPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.LoginPanel.Location = new System.Drawing.Point(368, 118);
+            this.LoginPanel.Name = "LoginPanel";
+            this.LoginPanel.Size = new System.Drawing.Size(323, 495);
+            this.LoginPanel.TabIndex = 2;
             // 
             // Exit
             // 
@@ -56,7 +68,7 @@
             this.Exit.ForeColor = System.Drawing.Color.Turquoise;
             this.Exit.Image = ((System.Drawing.Image)(resources.GetObject("Exit.Image")));
             this.Exit.ImageSize = new System.Drawing.Size(20, 20);
-            this.Exit.Location = new System.Drawing.Point(878, 12);
+            this.Exit.Location = new System.Drawing.Point(970, 12);
             this.Exit.Name = "Exit";
             this.Exit.OnHoverBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(151)))), ((int)(((byte)(143)))), ((int)(((byte)(255)))));
             this.Exit.OnHoverBorderColor = System.Drawing.Color.Black;
@@ -71,7 +83,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(949, 644);
+            this.ClientSize = new System.Drawing.Size(1041, 741);
             this.Controls.Add(this.LoginBackground);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MainMenu";
@@ -85,6 +97,7 @@
         #endregion
         private Guna.UI.WinForms.GunaPanel LoginBackground;
         private Guna.UI.WinForms.GunaButton Exit;
+        private System.Windows.Forms.Panel LoginPanel;
     }
 }
 

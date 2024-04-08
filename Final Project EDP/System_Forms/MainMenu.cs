@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Final_Project_EDP.System_UserControls;
+using MySql.Data;
 
 
 namespace Final_Project_EDP
@@ -16,13 +18,12 @@ namespace Final_Project_EDP
         public MainMenu()
         {
             InitializeComponent();
-            LoginBackground.BackColor = Color.FromArgb(7, 47, 95);
-            LoginInside li = new LoginInside();
+            LoginBox lb = new LoginBox();
+            SignupBox sb = new SignupBox();
             
-            li.TopLevel = false;
-            LoginBackground.Controls.Add(li);
-            li.BringToFront();
-            li.Show();
+            LoginPanel.Controls.Add(lb);
+            lb.BringToFront();
+            lb.Show();
         }
 
         private void Exit_Click(object sender, EventArgs e)
