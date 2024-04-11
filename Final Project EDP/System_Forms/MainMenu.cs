@@ -15,13 +15,16 @@ namespace Final_Project_EDP
 {
     public partial class MainMenu : Form
     {
+        public LoginBox lb { get; private set; }
+        public SignupBox sb { get; private set; }
         public MainMenu()
         {
             InitializeComponent();
-            LoginBox lb = new LoginBox();
-            SignupBox sb = new SignupBox();
+            lb = new LoginBox(this);
+            sb = new SignupBox(this);
             
             LoginPanel.Controls.Add(lb);
+            LoginPanel.Controls.Add(sb);
             lb.BringToFront();
             lb.Show();
         }

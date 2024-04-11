@@ -10,14 +10,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net.Mail;
+using Final_Project_EDP.System_Forms;
 
 namespace Final_Project_EDP.System_UserControls
 {
     public partial class SignupBox : UserControl
     {
-        public SignupBox()
+        public MainMenu mm {  get; private set; }
+        public SignupBox(MainMenu m)
         {
             InitializeComponent();
+            this.mm = m;
         }
 
         private void gunaGradiantButton1_Click(object sender, EventArgs e)
@@ -66,7 +69,16 @@ namespace Final_Project_EDP.System_UserControls
             {
                 MessageBox.Show("Successful!");
             }
-            Application.Exit();
+            
+            MainForm form = new MainForm(dc.GetAccount(email));
+            form.BringToFront();
+            form.Show();
+            mm.Hide();
+        }
+
+        private void gunaAdvenceButton1_Click(object sender, EventArgs e)
+        {
+            mm.lb.BringToFront();
         }
     }
 }

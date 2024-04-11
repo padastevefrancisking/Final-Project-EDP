@@ -1,4 +1,5 @@
-﻿using Final_Project_EDP.System_UserControls;
+﻿using Final_Project_EDP.System_Forms;
+using Final_Project_EDP.System_UserControls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,9 +14,11 @@ namespace Final_Project_EDP
 {
     public partial class LoginBox : UserControl
     {
-        public LoginBox()
+        public MainMenu mm { get; set; }
+        public LoginBox(MainMenu m)
         {
             InitializeComponent();
+            this.mm = m;
         }
 
         private void LoginButton_Click(object sender, EventArgs e)
@@ -30,12 +33,16 @@ namespace Final_Project_EDP
             }
             if (dc.verifyLoginInformation(emailAddress, password))
             {
-                Application.Exit();
+                MainForm form = new MainForm(dc.GetAccount(emailAddress));
+                form.BringToFront();
+                form.Show();
+                mm.Hide();
             }
         }
 
         private void SignupLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            mm.sb.BringToFront();
         }
     }
 }

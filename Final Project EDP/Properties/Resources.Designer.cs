@@ -73,6 +73,16 @@ namespace Final_Project_EDP.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap mail_envelope_1024x781 {
+            get {
+                object obj = ResourceManager.GetObject("mail-envelope.1024x781", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap tumblr_a04393f37004450c2dd6899d9c887edc_e4c1cda1_540__1_ {
             get {
                 object obj = ResourceManager.GetObject("tumblr_a04393f37004450c2dd6899d9c887edc_e4c1cda1_540 (1)", resourceCulture);

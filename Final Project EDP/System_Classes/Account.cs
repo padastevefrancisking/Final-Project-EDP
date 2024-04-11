@@ -35,7 +35,18 @@ namespace Final_Project_EDP.System_Classes
 
         public override string ToString()
         {
-            return "Name: " + this.firstName + " " + this.lastName + "\n Email Address" + this.emailAddress;
+            return "Name: " + this.firstName + " " + this.lastName + "\n Email Address" + this.emailAddress + "\nGender: " + this.gender.ToString();
+        }
+        public override bool Equals(object obj)
+        {
+            if (!(obj is Account)) 
+                return false;
+
+            if (obj == null)
+                return false;
+
+            Account other = obj as Account;
+            return (other.getFirstName() == this.firstName) && (other.getLastName() == this.lastName) && (other.gender == this.gender) && (other.birthdate == this.birthdate) && (other.userName == this.userName) && (other.emailAddress == this.emailAddress);
         }
 
         public string getFirstName()
