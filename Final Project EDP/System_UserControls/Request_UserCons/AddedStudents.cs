@@ -32,7 +32,6 @@ namespace Final_Project_EDP.System_UserControls.Request_UserCons
         {
             this.rf.accs.Remove(this.a);
             this.rf.TuteesLayoutPanel.Controls.Remove(this);
-            MessageBox.Show("Successfully Removed!");
         }
     }
 }

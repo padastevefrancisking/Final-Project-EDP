@@ -117,7 +117,6 @@ namespace Final_Project_EDP.System_UserControls
             DatabaseCon dc = new DatabaseCon();
             Account temp = dc.GetAccount(gb.Text);
 
-            MessageBox.Show("Hi");
             this.accs.Remove(temp);
             this.TuteesLayoutPanel.Controls.Remove((GunaButton)sender);
         }
@@ -141,7 +140,6 @@ namespace Final_Project_EDP.System_UserControls
             bool flag = true;
             foreach (Account a in tuts)
             {
-                MessageBox.Show((a.EmailAddress != this.req.mf.A.EmailAddress).ToString() + " " + (!accs.Contains(a)));
                 if (a.EmailAddress != this.req.mf.A.EmailAddress && !accs.Contains(a))
                 {
                     this.SearchboxResultPanel.Visible = true;

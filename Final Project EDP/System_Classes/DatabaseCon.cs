@@ -219,16 +219,23 @@ namespace Final_Project_EDP
             dgv.Columns["Schedule"].DefaultCellStyle.Format = "dddd, MMM dd";
             dgv.Columns["ID"].Visible = false;
 
-            if(mode == 0)
-            {
-                dt.Columns.Add("\t");
-                dt.Columns.Add(" ");
-            }
+            dt.Columns.Add("\t", typeof(GunaImageButton));
+            dt.Columns.Add(" ", typeof(GunaImageButton));
+
             for(int i = dt.Rows.Count - 1; i >= 0; i--)
             {
                 DataRow r = dt.Rows[i];
                 if (r["NumberOfTutees"].ToString() == "0")
                     dt.Rows.Remove(r);
+                else
+                {
+                    if(mode == 0)
+                    {
+                        r["\t"] = new GunaImageButton();
+                        r[" "] = new GunaImageButton();
+
+                    }
+                }
             }
         }
 
@@ -328,11 +335,6 @@ namespace Final_Project_EDP
 
                     accs.Add(new Account(fName, lName, gender, bday, uName, email, password));
                 }
-            }
-
-            foreach(Account acc in accs) 
-            {
-                MessageBox.Show(acc.ToString());
             }
 
             con.Close();
