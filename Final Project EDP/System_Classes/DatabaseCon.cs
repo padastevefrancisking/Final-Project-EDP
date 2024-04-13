@@ -199,12 +199,12 @@ namespace Final_Project_EDP
             string qry;
             if (mode == 0)
             {
-                qry = "SELECT r.RequestDay AS Schedule, t.TagName AS Subject, r.RequestID AS ID, r.RequestLocation AS Location, CONCAT(DATE_FORMAT(r.RequestStartTime, '%h:%m'), CASE WHEN HOUR(r.RequestStartTime) < 12 THEN ' AM' ELSE ' PM' END) AS Start, CONCAT(DATE_FORMAT(r.RequestEndTime, '%h:%m'), CASE WHEN HOUR(r.RequestEndTime) < 12 THEN ' AM' ELSE ' PM' END) AS End, r.Remarks AS Remarks FROM Request r INNER JOIN TuteeList tl ON r.RequestID = tl.RequestID INNER JOIN Tags t ON r.TutoredSubject = t.TagsID WHERE tl.TuteeEmail =  @email ORDER BY r.RequestDay ASC";
+                qry = "SELECT r.RequestDay AS Schedule, t.TagName AS Subject, r.RequestID AS ID, r.RequestLocation AS Location, CASE WHEN EXISTS ( SELECT 1 FROM TuteeList WHERE RequestID = r.RequestID AND TuteeEmail = @email) AND EXISTS ( SELECT 1 FROM TuteeList WHERE RequestID = r.RequestID ) THEN ( SELECT COUNT(*) FROM TuteeList WHERE RequestID = r.RequestID ) ELSE 0 END AS NumberOfTutees, CONCAT(DATE_FORMAT(r.RequestStartTime, '%h:%m'), CASE WHEN HOUR(r.RequestStartTime) < 12 THEN ' AM' ELSE ' PM' END) AS Start, CONCAT(DATE_FORMAT(r.RequestEndTime, '%h:%m'), CASE WHEN HOUR(r.RequestEndTime) < 12 THEN ' AM' ELSE ' PM' END) AS End, r.Remarks AS Remarks FROM Request r INNER JOIN Tags t ON r.TutoredSubject = t.TagsID ORDER BY r.RequestDay ASC";
             }
 
             else
             {
-                qry = "SELECT r.RequestDay AS Schedule, t.TagName AS Subject, r.RequestID AS ID, r.RequestLocation AS Location, CONCAT(DATE_FORMAT(r.RequestStartTime, '%h:%m'), CASE WHEN HOUR(r.RequestStartTime) < 12 THEN ' AM' ELSE ' PM' END) AS Start, CONCAT(DATE_FORMAT(r.RequestEndTime, '%h:%m'), CASE WHEN HOUR(r.RequestEndTime) < 12 THEN ' AM' ELSE ' PM' END) AS End, r.Remarks AS Remarks FROM Request r INNER JOIN TuteeList tl ON r.RequestID = tl.RequestID INNER JOIN Tags t ON r.TutoredSubject = t.TagsID WHERE tl.TuteeEmail !=  @email ORDER BY r.RequestDay ASC";
+                qry = "SELECT r.RequestDay AS Schedule, t.TagName AS Subject, r.RequestID AS ID, r.RequestLocation AS Location, CASE WHEN EXISTS ( SELECT 1 FROM TuteeList WHERE RequestID = r.RequestID AND TuteeEmail = @email) THEN 0 ELSE ( SELECT COUNT(DISTINCT TuteeEmail) FROM TuteeList WHERE RequestID = r.RequestID ) END AS NumberOfTutees, CONCAT(DATE_FORMAT(r.RequestStartTime, '%h:%m'), CASE WHEN HOUR(r.RequestStartTime) < 12 THEN ' AM' ELSE ' PM' END) AS Start, CONCAT(DATE_FORMAT(r.RequestEndTime, '%h:%m'), CASE WHEN HOUR(r.RequestEndTime) < 12 THEN ' AM' ELSE ' PM' END) AS End, r.Remarks AS Remarks FROM Request r INNER JOIN Tags t ON r.TutoredSubject = t.TagsID ORDER BY r.RequestDay ASC";
             }
 
             MySqlCommand cmd = new MySqlCommand(qry, con);
@@ -218,6 +218,18 @@ namespace Final_Project_EDP
 
             dgv.Columns["Schedule"].DefaultCellStyle.Format = "dddd, MMM dd";
             dgv.Columns["ID"].Visible = false;
+
+            if(mode == 0)
+            {
+                dt.Columns.Add("\t");
+                dt.Columns.Add(" ");
+            }
+            for(int i = dt.Rows.Count - 1; i >= 0; i--)
+            {
+                DataRow r = dt.Rows[i];
+                if (r["NumberOfTutees"].ToString() == "0")
+                    dt.Rows.Remove(r);
+            }
         }
 
         public int getTagsID(string TagsName)
