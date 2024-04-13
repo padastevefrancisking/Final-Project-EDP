@@ -16,7 +16,7 @@ namespace Final_Project_EDP
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainMenu());
+            Application.Run(new PreMainForm());
         }
     }
 }

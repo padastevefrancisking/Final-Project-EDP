@@ -14,7 +14,7 @@ namespace Final_Project_EDP.System_Classes
         public DateTime ScheduleDay { get; private set; }
         public DateTime ScheduleTimeStart { get; private set; }
         public DateTime RequestTimeEnd { get; private set; }
-        public Tags TutoredSubject { get; private set; }
+        public int TutoredSubject { get; private set; }
         public List<Account> Tutees { get; private set; }
         public string Remarks { get; private set; }
         public RequestStatus RequestStatus { get; private set; }

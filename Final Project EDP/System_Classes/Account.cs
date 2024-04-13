@@ -10,92 +10,41 @@ namespace Final_Project_EDP.System_Classes
 {
     public class Account
     {
-        private string firstName;
-        private string lastName;
-        private System_Enums.Gender gender;
-        private DateTime birthdate;
-        private string degreeProgram;
-        private string userName;
-        private string emailAddress;
-        private string password;
-        private bool isAdmin;
+        public string FirstName { get; private set; }
+        public string LastName { get; private set; }
+        public System_Enums.Gender Gender { get; private set; }
+        public DateTime Birthdate { get; private set; }
+        public string DegreeProgram { get; private set; }
+        public string Username { get; private set; }
+        public string EmailAddress { get; private set; }
+        public string Password { get; private set; }
+        public bool IsAdmin { get; private set; }
 
         public Account(string firstName, string lastName, Gender gender, DateTime birthdate, string userName, string emailAddress, string password)
         {
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.gender = gender;
-            this.birthdate = birthdate;
-            this.degreeProgram = string.Empty;
-            this.userName = userName;
-            this.emailAddress = emailAddress;
-            this.password = password;
-            this.isAdmin = false;
+            this.FirstName = firstName;
+            this.LastName = lastName;
+            this.Gender = gender;
+            this.Birthdate = birthdate;
+            this.DegreeProgram = string.Empty;
+            this.Username = userName;
+            this.EmailAddress = emailAddress;
+            this.Password = password;
+            this.IsAdmin = false;
         }
 
         public override string ToString()
         {
-            return "Name: " + this.firstName + " " + this.lastName + "\n Email Address" + this.emailAddress + "\nGender: " + this.gender.ToString();
+            return "Name: " + this.FirstName + " " + this.LastName;
         }
+
         public override bool Equals(object obj)
         {
-            if (!(obj is Account)) 
-                return false;
-
-            if (obj == null)
-                return false;
+            if (!(obj is Account)) return false;
+            if (obj == null) return false;
 
             Account other = obj as Account;
-            return (other.getFirstName() == this.firstName) && (other.getLastName() == this.lastName) && (other.gender == this.gender) && (other.birthdate == this.birthdate) && (other.userName == this.userName) && (other.emailAddress == this.emailAddress);
+            return other.EmailAddress == this.EmailAddress;
         }
-
-        public string getFirstName()
-        {
-            string r = this.firstName;
-            return r;
-        }
-
-        public string getLastName()
-        {
-            string r = this.lastName;
-            return r;
-        }
-        public Gender getGender() 
-        {
-            Gender r = this.gender;
-            return r;
-        }
-        public DateTime getBirthdate()
-        {
-            DateTime r = this.birthdate;
-            return r;
-        }
-        public string getDegreeProgram()
-        {
-            string r = this.degreeProgram;
-            return r;
-        }
-        public string getUsername()
-        {
-            string r = this.userName;
-            return r;
-        }
-        public string getPassword()
-        {
-            string r = this.password;
-            return r;
-        }
-        public bool getIsAdmin()
-        {
-            bool r = this.isAdmin;
-            return r;
-        }
-        public string getEmailAddress()
-        {
-            string r = this.emailAddress;
-            return r;
-        }
-
-        
     }
 }

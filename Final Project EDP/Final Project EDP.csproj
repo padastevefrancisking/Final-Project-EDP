@@ -124,83 +124,93 @@
     <Compile Include="System_Classes\Schedule.cs" />
     <Compile Include="System_Enums\Gender.cs" />
     <Compile Include="System_Enums\RequestStatus.cs" />
-    <Compile Include="System_Enums\Tags.cs" />
     <Compile Include="System_Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="System_Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="System_UnitTests\RequestTest.cs" />
-    <Compile Include="System_UserControls\Dashboard.cs">
+    <Compile Include="System_UserControls\MainForm_UserCons\Dashboard.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="System_UserControls\Dashboard.Designer.cs">
+    <Compile Include="System_UserControls\MainForm_UserCons\Dashboard.Designer.cs">
       <DependentUpon>Dashboard.cs</DependentUpon>
     </Compile>
-    <Compile Include="System_UserControls\LoginBox.cs">
+    <Compile Include="System_UserControls\LoginAndSignUp_UserCons\LoginBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="System_UserControls\LoginBox.Designer.cs">
+    <Compile Include="System_UserControls\LoginAndSignUp_UserCons\LoginBox.Designer.cs">
       <DependentUpon>LoginBox.cs</DependentUpon>
     </Compile>
     <Compile Include="System_Classes\Account.cs" />
     <Compile Include="System_Classes\DatabaseCon.cs" />
-    <Compile Include="System_Forms\MainMenu.cs">
+    <Compile Include="System_Forms\PreMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="System_Forms\MainMenu.Designer.cs">
-      <DependentUpon>MainMenu.cs</DependentUpon>
+    <Compile Include="System_Forms\PreMainForm.Designer.cs">
+      <DependentUpon>PreMainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="System_UserControls\RequestBox.cs">
+    <Compile Include="System_UserControls\Request_UserCons\AddedStudents.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="System_UserControls\RequestBox.Designer.cs">
+    <Compile Include="System_UserControls\Request_UserCons\AddedStudents.Designer.cs">
+      <DependentUpon>AddedStudents.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System_UserControls\Request_UserCons\RequestBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="System_UserControls\Request_UserCons\RequestBox.Designer.cs">
       <DependentUpon>RequestBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="System_UserControls\RequestFillup.cs">
+    <Compile Include="System_UserControls\Request_UserCons\RequestFillup.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="System_UserControls\RequestFillup.Designer.cs">
+    <Compile Include="System_UserControls\Request_UserCons\RequestFillup.Designer.cs">
       <DependentUpon>RequestFillup.cs</DependentUpon>
     </Compile>
-    <Compile Include="System_UserControls\Requests.cs">
+    <Compile Include="System_UserControls\MainForm_UserCons\Requests.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="System_UserControls\Requests.Designer.cs">
+    <Compile Include="System_UserControls\MainForm_UserCons\Requests.Designer.cs">
       <DependentUpon>Requests.cs</DependentUpon>
     </Compile>
-    <Compile Include="System_UserControls\Schedules.cs">
+    <Compile Include="System_UserControls\MainForm_UserCons\Schedules.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="System_UserControls\Schedules.Designer.cs">
+    <Compile Include="System_UserControls\MainForm_UserCons\Schedules.Designer.cs">
       <DependentUpon>Schedules.cs</DependentUpon>
     </Compile>
-    <Compile Include="System_UserControls\SignupBox.cs">
+    <Compile Include="System_UserControls\LoginAndSignUp_UserCons\SignupBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="System_UserControls\SignupBox.Designer.cs">
+    <Compile Include="System_UserControls\LoginAndSignUp_UserCons\SignupBox.Designer.cs">
       <DependentUpon>SignupBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="System_UserControls\Tabs.cs">
+    <Compile Include="System_UserControls\MainForm_UserCons\Tabs.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="System_UserControls\Tabs.Designer.cs">
+    <Compile Include="System_UserControls\MainForm_UserCons\Tabs.Designer.cs">
       <DependentUpon>Tabs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System_UserControls\Request_UserCons\TuteeSearchResult.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="System_UserControls\Request_UserCons\TuteeSearchResult.Designer.cs">
+      <DependentUpon>TuteeSearchResult.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="System_Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="System_UserControls\Dashboard.resx">
+    <EmbeddedResource Include="System_UserControls\MainForm_UserCons\Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="System_UserControls\LoginBox.resx">
+    <EmbeddedResource Include="System_UserControls\LoginAndSignUp_UserCons\LoginBox.resx">
       <DependentUpon>LoginBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="System_Forms\MainMenu.resx">
-      <DependentUpon>MainMenu.cs</DependentUpon>
+    <EmbeddedResource Include="System_Forms\PreMainForm.resx">
+      <DependentUpon>PreMainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -212,23 +222,29 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="System_UserControls\RequestBox.resx">
+    <EmbeddedResource Include="System_UserControls\Request_UserCons\AddedStudents.resx">
+      <DependentUpon>AddedStudents.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System_UserControls\Request_UserCons\RequestBox.resx">
       <DependentUpon>RequestBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="System_UserControls\RequestFillup.resx">
+    <EmbeddedResource Include="System_UserControls\Request_UserCons\RequestFillup.resx">
       <DependentUpon>RequestFillup.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="System_UserControls\Requests.resx">
+    <EmbeddedResource Include="System_UserControls\MainForm_UserCons\Requests.resx">
       <DependentUpon>Requests.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="System_UserControls\Schedules.resx">
+    <EmbeddedResource Include="System_UserControls\MainForm_UserCons\Schedules.resx">
       <DependentUpon>Schedules.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="System_UserControls\SignupBox.resx">
+    <EmbeddedResource Include="System_UserControls\LoginAndSignUp_UserCons\SignupBox.resx">
       <DependentUpon>SignupBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="System_UserControls\Tabs.resx">
+    <EmbeddedResource Include="System_UserControls\MainForm_UserCons\Tabs.resx">
       <DependentUpon>Tabs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System_UserControls\Request_UserCons\TuteeSearchResult.resx">
+      <DependentUpon>TuteeSearchResult.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

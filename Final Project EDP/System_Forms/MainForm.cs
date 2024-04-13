@@ -14,12 +14,13 @@ namespace Final_Project_EDP.System_Forms
 {
     public partial class MainForm : Form
     {
-        public Account a {  get; private set; }
+        public Account A {  get; private set; }
+        public int PendingReqs { get; set; }
 
         public MainForm(Account a)
         {
             InitializeComponent();
-            this.a = a;
+            this.A = a;
 
             TabsPanel.Controls.Add(new Tabs(this));
             ContentPanel.Controls.Add(new Dashboard(this));
