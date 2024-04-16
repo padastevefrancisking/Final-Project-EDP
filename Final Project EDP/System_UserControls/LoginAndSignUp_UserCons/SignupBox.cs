@@ -17,10 +17,12 @@ namespace Final_Project_EDP.System_UserControls
     public partial class SignupBox : UserControl
     {
         public PreMainForm Mm { get; private set; }
+        private int otp;
         public SignupBox(PreMainForm m)
         {
             InitializeComponent();
             this.Mm = m;
+            this.OTPTextbox.Enabled = false;
         }
 
         private void gunaGradiantButton1_Click(object sender, EventArgs e)
@@ -30,6 +32,7 @@ namespace Final_Project_EDP.System_UserControls
             string email = EmailAddressTextbox.Text, username = UsernameTextbox.Text;
             DateTime bday = BirthdatePicker.Value;
             Gender gender;
+            string ot = this.OTPTextbox.Text;
             
             switch(GenderComboBox.SelectedItem.ToString())
             {
@@ -50,7 +53,7 @@ namespace Final_Project_EDP.System_UserControls
                     break;
             }
 
-            if(bday == null || fPass == string.Empty || fName == string.Empty || email == string.Empty || gender == Gender.Unassigned) 
+            if(bday == null || fPass == string.Empty || fName == string.Empty || email == string.Empty || gender == Gender.Unassigned || this.otp.ToString() == string.Empty) 
             {
                 MessageBox.Show("Complete all fields.");
                 return;
@@ -59,6 +62,12 @@ namespace Final_Project_EDP.System_UserControls
             if (fPass != lPass) 
             {
                 MessageBox.Show("Passwords don't match. Retype again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if(this.otp.ToString() != ot)
+            {
+                MessageBox.Show("OTP doesn't match. Retype again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -78,7 +87,19 @@ namespace Final_Project_EDP.System_UserControls
 
         private void gunaAdvenceButton1_Click(object sender, EventArgs e)
         {
-            Mm.lb.BringToFront();
+
+            Mm.LoginPanel.Controls.Clear();
+            Mm.LoginPanel.Controls.Add(new LoginBox(this.Mm));
+            this.Hide();
+        }
+
+        private void SendOTPButton_Click(object sender, EventArgs e)
+        {
+            DatabaseCon dc = new DatabaseCon();
+            if(dc.VerifyEmail(this.EmailAddressTextbox.Text))
+            {
+                this.otp = this.Mm.SendOtpToGmail(this.EmailAddressTextbox.Text);
+            }
         }
     }
 }

@@ -11,6 +11,7 @@ namespace Final_Project_EDP.System_Enums
         Pending,
         Accepted,
         Ignored,
-        Cancelled
+        Cancelled,
+        Deleted
     }
 }

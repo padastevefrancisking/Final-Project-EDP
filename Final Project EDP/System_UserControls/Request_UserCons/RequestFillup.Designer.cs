@@ -48,7 +48,6 @@
             this.SearchboxResultPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.BackButton = new Guna.UI.WinForms.GunaAdvenceButton();
             this.MakeRequestButton = new Guna.UI.WinForms.GunaButton();
-            this.gunaButton1 = new Guna.UI.WinForms.GunaButton();
             this.gunaAdvenceButton1 = new Guna.UI.WinForms.GunaAdvenceButton();
             this.SuspendLayout();
             // 
@@ -308,27 +307,6 @@
             this.MakeRequestButton.Text = "gunaButton1";
             this.MakeRequestButton.Click += new System.EventHandler(this.gunaButton1_Click);
             // 
-            // gunaButton1
-            // 
-            this.gunaButton1.AnimationHoverSpeed = 0.07F;
-            this.gunaButton1.AnimationSpeed = 0.03F;
-            this.gunaButton1.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            this.gunaButton1.BorderColor = System.Drawing.Color.Black;
-            this.gunaButton1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.gunaButton1.ForeColor = System.Drawing.Color.White;
-            this.gunaButton1.Image = ((System.Drawing.Image)(resources.GetObject("gunaButton1.Image")));
-            this.gunaButton1.ImageSize = new System.Drawing.Size(20, 20);
-            this.gunaButton1.Location = new System.Drawing.Point(65, 569);
-            this.gunaButton1.Name = "gunaButton1";
-            this.gunaButton1.OnHoverBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(151)))), ((int)(((byte)(143)))), ((int)(((byte)(255)))));
-            this.gunaButton1.OnHoverBorderColor = System.Drawing.Color.Black;
-            this.gunaButton1.OnHoverForeColor = System.Drawing.Color.White;
-            this.gunaButton1.OnHoverImage = null;
-            this.gunaButton1.OnPressedColor = System.Drawing.Color.Black;
-            this.gunaButton1.Size = new System.Drawing.Size(160, 42);
-            this.gunaButton1.TabIndex = 31;
-            this.gunaButton1.Text = "gunaButton1";
-            // 
             // gunaAdvenceButton1
             // 
             this.gunaAdvenceButton1.AnimationHoverSpeed = 0.07F;
@@ -363,7 +341,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.gunaAdvenceButton1);
-            this.Controls.Add(this.gunaButton1);
             this.Controls.Add(this.SearchboxResultPanel);
             this.Controls.Add(this.SearchTuteeTextbox);
             this.Controls.Add(this.SoloRequestCheckBox);
@@ -412,7 +389,6 @@
         private Guna.UI.WinForms.GunaLineTextBox SearchTuteeTextbox;
         public System.Windows.Forms.FlowLayoutPanel SearchboxResultPanel;
         public System.Windows.Forms.FlowLayoutPanel TuteesLayoutPanel;
-        private Guna.UI.WinForms.GunaButton gunaButton1;
         private Guna.UI.WinForms.GunaAdvenceButton gunaAdvenceButton1;
     }
 }

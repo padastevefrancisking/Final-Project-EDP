@@ -1,5 +1,6 @@
 ﻿using Final_Project_EDP.System_Forms;
 using Final_Project_EDP.System_UserControls;
+using Final_Project_EDP.System_UserControls.LoginAndSignUp_UserCons;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,7 +32,7 @@ namespace Final_Project_EDP
                 MessageBox.Show("Complete all fields");
                 return;
             }
-            if (dc.verifyLoginInformation(emailAddress, password))
+            if (dc.VerifyLoginInformation(emailAddress, password))
             {
                 MainForm form = new MainForm(dc.GetAccount(emailAddress));
                 form.BringToFront();
@@ -42,7 +43,18 @@ namespace Final_Project_EDP
 
         private void SignupLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            mm.sb.BringToFront();
+
+            mm.LoginPanel.Controls.Clear();
+            mm.LoginPanel.Controls.Add(new SignupBox(this.mm));
+            this.Hide();
+        }
+
+        private void ForgotPasswordLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+            mm.LoginPanel.Controls.Clear();
+            mm.LoginPanel.Controls.Add(new ForgotPassword(this.mm));
+            this.Hide();
         }
     }
 }

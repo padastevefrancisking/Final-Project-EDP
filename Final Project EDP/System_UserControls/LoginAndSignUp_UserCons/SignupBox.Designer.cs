@@ -48,6 +48,9 @@
             this.UsernameTextbox = new Guna.UI.WinForms.GunaLineTextBox();
             this.FirstNameTextbox = new Guna.UI.WinForms.GunaLineTextBox();
             this.gunaAdvenceButton1 = new Guna.UI.WinForms.GunaAdvenceButton();
+            this.OTPLabel = new Guna.UI.WinForms.GunaLabel();
+            this.OTPTextbox = new Guna.UI.WinForms.GunaLineTextBox();
+            this.SendOTPButton = new Guna.UI.WinForms.GunaButton();
             this.SuspendLayout();
             // 
             // SignupHeader
@@ -74,7 +77,7 @@
             // 
             this.gunaLabel1.AutoSize = true;
             this.gunaLabel1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.gunaLabel1.Location = new System.Drawing.Point(43, 155);
+            this.gunaLabel1.Location = new System.Drawing.Point(224, 96);
             this.gunaLabel1.Name = "gunaLabel1";
             this.gunaLabel1.Size = new System.Drawing.Size(79, 20);
             this.gunaLabel1.TabIndex = 2;
@@ -87,10 +90,10 @@
             this.LastNameTextbox.FocusedLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
             this.LastNameTextbox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.LastNameTextbox.LineColor = System.Drawing.Color.Gainsboro;
-            this.LastNameTextbox.Location = new System.Drawing.Point(47, 178);
+            this.LastNameTextbox.Location = new System.Drawing.Point(241, 119);
             this.LastNameTextbox.Name = "LastNameTextbox";
             this.LastNameTextbox.PasswordChar = '\0';
-            this.LastNameTextbox.Size = new System.Drawing.Size(351, 30);
+            this.LastNameTextbox.Size = new System.Drawing.Size(157, 37);
             this.LastNameTextbox.TabIndex = 4;
             // 
             // EmailAddressTextbox
@@ -100,7 +103,7 @@
             this.EmailAddressTextbox.FocusedLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
             this.EmailAddressTextbox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.EmailAddressTextbox.LineColor = System.Drawing.Color.Gainsboro;
-            this.EmailAddressTextbox.Location = new System.Drawing.Point(47, 302);
+            this.EmailAddressTextbox.Location = new System.Drawing.Point(47, 248);
             this.EmailAddressTextbox.Name = "EmailAddressTextbox";
             this.EmailAddressTextbox.PasswordChar = '\0';
             this.EmailAddressTextbox.Size = new System.Drawing.Size(351, 30);
@@ -110,7 +113,7 @@
             // 
             this.EmailAddressLabel.AutoSize = true;
             this.EmailAddressLabel.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.EmailAddressLabel.Location = new System.Drawing.Point(43, 279);
+            this.EmailAddressLabel.Location = new System.Drawing.Point(43, 225);
             this.EmailAddressLabel.Name = "EmailAddressLabel";
             this.EmailAddressLabel.Size = new System.Drawing.Size(103, 20);
             this.EmailAddressLabel.TabIndex = 5;
@@ -233,7 +236,7 @@
             this.BirthdatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.BirthdatePicker.Location = new System.Drawing.Point(241, 498);
             this.BirthdatePicker.Name = "BirthdatePicker";
-            this.BirthdatePicker.Size = new System.Drawing.Size(114, 22);
+            this.BirthdatePicker.Size = new System.Drawing.Size(157, 22);
             this.BirthdatePicker.TabIndex = 16;
             this.BirthdatePicker.Value = new System.DateTime(2024, 4, 7, 0, 0, 0, 0);
             // 
@@ -241,7 +244,7 @@
             // 
             this.UsernameLabel.AutoSize = true;
             this.UsernameLabel.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.UsernameLabel.Location = new System.Drawing.Point(43, 219);
+            this.UsernameLabel.Location = new System.Drawing.Point(43, 164);
             this.UsernameLabel.Name = "UsernameLabel";
             this.UsernameLabel.Size = new System.Drawing.Size(75, 20);
             this.UsernameLabel.TabIndex = 17;
@@ -254,7 +257,7 @@
             this.UsernameTextbox.FocusedLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
             this.UsernameTextbox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.UsernameTextbox.LineColor = System.Drawing.Color.Gainsboro;
-            this.UsernameTextbox.Location = new System.Drawing.Point(47, 242);
+            this.UsernameTextbox.Location = new System.Drawing.Point(47, 187);
             this.UsernameTextbox.Name = "UsernameTextbox";
             this.UsernameTextbox.PasswordChar = '\0';
             this.UsernameTextbox.Size = new System.Drawing.Size(351, 30);
@@ -270,7 +273,7 @@
             this.FirstNameTextbox.Location = new System.Drawing.Point(47, 119);
             this.FirstNameTextbox.Name = "FirstNameTextbox";
             this.FirstNameTextbox.PasswordChar = '\0';
-            this.FirstNameTextbox.Size = new System.Drawing.Size(351, 37);
+            this.FirstNameTextbox.Size = new System.Drawing.Size(147, 37);
             this.FirstNameTextbox.TabIndex = 19;
             // 
             // gunaAdvenceButton1
@@ -302,11 +305,59 @@
             this.gunaAdvenceButton1.Text = "gunaAdvenceButton1";
             this.gunaAdvenceButton1.Click += new System.EventHandler(this.gunaAdvenceButton1_Click);
             // 
+            // OTPLabel
+            // 
+            this.OTPLabel.AutoSize = true;
+            this.OTPLabel.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.OTPLabel.Location = new System.Drawing.Point(43, 281);
+            this.OTPLabel.Name = "OTPLabel";
+            this.OTPLabel.Size = new System.Drawing.Size(35, 20);
+            this.OTPLabel.TabIndex = 22;
+            this.OTPLabel.Text = "OTP";
+            // 
+            // OTPTextbox
+            // 
+            this.OTPTextbox.BackColor = System.Drawing.Color.White;
+            this.OTPTextbox.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.OTPTextbox.FocusedLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            this.OTPTextbox.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.OTPTextbox.LineColor = System.Drawing.Color.Gainsboro;
+            this.OTPTextbox.Location = new System.Drawing.Point(47, 304);
+            this.OTPTextbox.Name = "OTPTextbox";
+            this.OTPTextbox.PasswordChar = '\0';
+            this.OTPTextbox.Size = new System.Drawing.Size(272, 30);
+            this.OTPTextbox.TabIndex = 23;
+            // 
+            // SendOTPButton
+            // 
+            this.SendOTPButton.AnimationHoverSpeed = 0.07F;
+            this.SendOTPButton.AnimationSpeed = 0.03F;
+            this.SendOTPButton.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            this.SendOTPButton.BorderColor = System.Drawing.Color.Black;
+            this.SendOTPButton.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.SendOTPButton.ForeColor = System.Drawing.Color.White;
+            this.SendOTPButton.Image = ((System.Drawing.Image)(resources.GetObject("SendOTPButton.Image")));
+            this.SendOTPButton.ImageSize = new System.Drawing.Size(20, 20);
+            this.SendOTPButton.Location = new System.Drawing.Point(325, 304);
+            this.SendOTPButton.Name = "SendOTPButton";
+            this.SendOTPButton.OnHoverBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(151)))), ((int)(((byte)(143)))), ((int)(((byte)(255)))));
+            this.SendOTPButton.OnHoverBorderColor = System.Drawing.Color.Black;
+            this.SendOTPButton.OnHoverForeColor = System.Drawing.Color.White;
+            this.SendOTPButton.OnHoverImage = null;
+            this.SendOTPButton.OnPressedColor = System.Drawing.Color.Black;
+            this.SendOTPButton.Size = new System.Drawing.Size(76, 30);
+            this.SendOTPButton.TabIndex = 24;
+            this.SendOTPButton.Text = "Send";
+            this.SendOTPButton.Click += new System.EventHandler(this.SendOTPButton_Click);
+            // 
             // SignupBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(222)))), ((int)(((byte)(230)))));
+            this.Controls.Add(this.SendOTPButton);
+            this.Controls.Add(this.OTPTextbox);
+            this.Controls.Add(this.OTPLabel);
             this.Controls.Add(this.gunaAdvenceButton1);
             this.Controls.Add(this.FirstNameTextbox);
             this.Controls.Add(this.UsernameTextbox);
@@ -354,5 +405,8 @@
         private Guna.UI.WinForms.GunaLineTextBox UsernameTextbox;
         private Guna.UI.WinForms.GunaLineTextBox FirstNameTextbox;
         private Guna.UI.WinForms.GunaAdvenceButton gunaAdvenceButton1;
+        private Guna.UI.WinForms.GunaLabel OTPLabel;
+        private Guna.UI.WinForms.GunaLineTextBox OTPTextbox;
+        private Guna.UI.WinForms.GunaButton SendOTPButton;
     }
 }

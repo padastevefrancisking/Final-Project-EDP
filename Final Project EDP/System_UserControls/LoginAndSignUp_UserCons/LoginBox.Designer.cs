@@ -36,6 +36,7 @@
             this.PasswordLabel = new Guna.UI.WinForms.GunaLabel();
             this.PasswordTextbox = new Guna.UI.WinForms.GunaTextBox();
             this.LoginButton = new Guna.UI.WinForms.GunaButton();
+            this.ForgotPasswordLinkLabel = new Guna.UI.WinForms.GunaLinkLabel();
             this.SuspendLayout();
             // 
             // LoginHeader
@@ -144,11 +145,24 @@
             this.LoginButton.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.LoginButton.Click += new System.EventHandler(this.LoginButton_Click);
             // 
+            // ForgotPasswordLinkLabel
+            // 
+            this.ForgotPasswordLinkLabel.AutoSize = true;
+            this.ForgotPasswordLinkLabel.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.ForgotPasswordLinkLabel.Location = new System.Drawing.Point(243, 235);
+            this.ForgotPasswordLinkLabel.Name = "ForgotPasswordLinkLabel";
+            this.ForgotPasswordLinkLabel.Size = new System.Drawing.Size(125, 20);
+            this.ForgotPasswordLinkLabel.TabIndex = 9;
+            this.ForgotPasswordLinkLabel.TabStop = true;
+            this.ForgotPasswordLinkLabel.Text = "Forgot Password?";
+            this.ForgotPasswordLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.ForgotPasswordLinkLabel_LinkClicked);
+            // 
             // LoginBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.Controls.Add(this.ForgotPasswordLinkLabel);
             this.Controls.Add(this.LoginButton);
             this.Controls.Add(this.PasswordTextbox);
             this.Controls.Add(this.PasswordLabel);
@@ -174,5 +188,6 @@
         private Guna.UI.WinForms.GunaLabel PasswordLabel;
         private Guna.UI.WinForms.GunaTextBox PasswordTextbox;
         private Guna.UI.WinForms.GunaButton LoginButton;
+        private Guna.UI.WinForms.GunaLinkLabel ForgotPasswordLinkLabel;
     }
 }

@@ -22,7 +22,7 @@ namespace Final_Project_EDP.System_UserControls
             this.Dock = DockStyle.Fill;
 
             DatabaseCon dc = new DatabaseCon();
-            this.PendingAmountPanel.Text = dc.getNumberOfRequests(this.mf.A).ToString();
+            this.PendingAmountPanel.Text = dc.GetNumberOfRequests(this.mf.A).ToString();
         }
     }
 }

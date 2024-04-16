@@ -19,19 +19,7 @@ namespace Final_Project_EDP.System_Classes
         public int TutoredSubject { get; private set; }
         public List<Account> Tutees { get; private set; }
         public string Remarks { get; private set; }
-        public RequestStatus RequestStatus { get; private set; }
-
-        public Request(string requestLocation, DateTime requestDay, DateTime requestTimeStart, DateTime requestTimeEnd, int tutoredSubject, List<Account> tutees)
-        {
-            this.RequestLocation = requestLocation;
-            this.RequestDay = requestDay;
-            this.RequestTimeStart = requestTimeStart;
-            this.RequestTimeEnd = requestTimeEnd;
-            this.TutoredSubject = tutoredSubject;
-            this.Tutees = tutees;
-            this.Remarks = string.Empty;
-            this.RequestStatus = RequestStatus.Pending;
-        }
+        public RequestStatus RequestStatus { get; set; }
 
         public Request(string requestLocation, DateTime requestDay, DateTime requestTimeStart, DateTime requestTimeEnd, int tutoredSubject, List<Account> tutees, string remarks)
         {
@@ -43,6 +31,46 @@ namespace Final_Project_EDP.System_Classes
             this.Tutees = tutees;
             this.Remarks = remarks;
             this.RequestStatus = RequestStatus.Pending;
+        }
+
+        public Request(int requestID, string requestLocation, DateTime requestDay, DateTime requestTimeStart, DateTime requestTimeEnd, int tutoredSubject, List<Account> tutees, string remarks, RequestStatus rStatus)
+        {
+            this.RequestID = requestID;
+            this.RequestLocation = requestLocation;
+            this.RequestDay = requestDay;
+            this.RequestTimeStart = requestTimeStart;
+            this.RequestTimeEnd = requestTimeEnd;
+            this.TutoredSubject = tutoredSubject;
+            this.Tutees = tutees;
+            this.Remarks = remarks;
+            this.RequestStatus = rStatus;
+        }
+
+        public override string ToString()
+        {
+            string r = "(" + this.RequestID + ")" + " Tutor Request about ";
+
+            switch(this.TutoredSubject)
+            {
+                case 1:
+                    r += "Mathematics ";
+                    break;
+                case 2:
+                    r += "Computer Science ";
+                    break ;
+                case 3:
+                    r += "Calculus ";
+                    break;
+                case 4:
+                    r += "Physics ";
+                    break;
+                default:
+                    break;
+            }
+
+            r += "at " + this.RequestLocation + "\n";
+            r += "Date: " + this.RequestDay.ToString("dddd, MMM dd") + " (" + this.RequestTimeStart.ToString("hh:mm:tt") + "-" + this.RequestTimeEnd.ToString("hh:mm:tt") + ")";
+            return r;
         }
     }
 }

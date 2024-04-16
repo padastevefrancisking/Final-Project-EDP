@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Final_Project_EDP.System_UserControls;
 using MySql.Data;
+using System.Net.Mail;
+using System.Net;
+using Final_Project_EDP.System_UserControls.LoginAndSignUp_UserCons;
 
 
 namespace Final_Project_EDP
@@ -17,21 +20,42 @@ namespace Final_Project_EDP
     {
         public LoginBox lb { get; private set; }
         public SignupBox sb { get; private set; }
+        public ForgotPassword fp { get; private set; }
+
         public PreMainForm()
         {
             InitializeComponent();
-            lb = new LoginBox(this);
-            sb = new SignupBox(this);
-            
-            LoginPanel.Controls.Add(lb);
-            LoginPanel.Controls.Add(sb);
-            lb.BringToFront();
-            lb.Show();
+            LoginPanel.Controls.Add(new LoginBox(this));
         }
 
         private void Exit_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        public int SendOtpToGmail(string recipient)
+        {
+
+            int otp = new Random().Next(100000, 1000000);
+
+                string sender = "studyverseapp@gmail.com";
+                string password = "vnyw amod ufnk nwym";
+                string smtpServer = "smtp.gmail.com";
+                int port = 587;
+
+            var message = new MailMessage(sender, recipient);
+            message.Subject = "Your One-Time Password (OTP)";
+            message.Body = $"Your OTP is: {otp}";
+            message.IsBodyHtml = false;
+
+            using (var smtpClient = new SmtpClient(smtpServer, port))
+            {
+                smtpClient.EnableSsl = true; 
+                smtpClient.Credentials = new NetworkCredential(sender, password);
+                smtpClient.Send(message);
+            }
+
+            return otp;
         }
     }
 }

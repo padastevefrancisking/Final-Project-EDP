@@ -78,14 +78,14 @@
             this.Exit.TabIndex = 0;
             this.Exit.Click += new System.EventHandler(this.Exit_Click);
             // 
-            // MainMenu
+            // PreMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1087, 527);
             this.Controls.Add(this.LoginBackground);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "MainMenu";
+            this.Name = "PreMainForm";
             this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.LoginBackground.ResumeLayout(false);
@@ -96,7 +96,7 @@
         #endregion
         private Guna.UI.WinForms.GunaPanel LoginBackground;
         private Guna.UI.WinForms.GunaButton Exit;
-        private System.Windows.Forms.Panel LoginPanel;
+        public System.Windows.Forms.Panel LoginPanel;
     }
 }
 

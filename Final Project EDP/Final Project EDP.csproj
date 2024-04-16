@@ -130,6 +130,12 @@
     <Compile Include="System_Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="System_UserControls\LoginAndSignUp_UserCons\ForgotPassword.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="System_UserControls\LoginAndSignUp_UserCons\ForgotPassword.Designer.cs">
+      <DependentUpon>ForgotPassword.cs</DependentUpon>
+    </Compile>
     <Compile Include="System_UserControls\MainForm_UserCons\Dashboard.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -202,6 +208,9 @@
     </Compile>
     <EmbeddedResource Include="System_Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System_UserControls\LoginAndSignUp_UserCons\ForgotPassword.resx">
+      <DependentUpon>ForgotPassword.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="System_UserControls\MainForm_UserCons\Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>

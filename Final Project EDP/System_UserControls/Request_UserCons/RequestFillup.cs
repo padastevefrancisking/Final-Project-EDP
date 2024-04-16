@@ -22,6 +22,7 @@ namespace Final_Project_EDP.System_UserControls
         private Form f;
         private Requests req;
         public List<Account> accs { get; set; }
+        private int identifier;
         public RequestFillup(Form f, Requests req)
         {
             InitializeComponent();
@@ -29,6 +30,8 @@ namespace Final_Project_EDP.System_UserControls
             this.req = req;
             this.accs = new List<Account>();
             accs.Add(this.req.mf.A);
+            this.identifier = 0;
+
 
             this.SoloRequestCheckBox.Checked = true;
             this.refreshPanel();
@@ -36,13 +39,40 @@ namespace Final_Project_EDP.System_UserControls
             this.SubjectTagComboBox.Items.Clear();
 
             DatabaseCon dc = new DatabaseCon();
-            List<string> tags = dc.getTags();
+            List<string> tags = dc.GetTags();
 
             foreach (string tag in tags)
                 this.SubjectTagComboBox.Items.Add(tag);
 
+            this.MakeRequestButton.Text = "Make Request";
+
         }
 
+        public RequestFillup(Form f, Requests req, Request r)
+        {
+            InitializeComponent();
+            this.f = f;
+            this.req = req;
+            this.accs = r.Tutees;
+            this.identifier = r.RequestID;
+
+            this.SubjectTagComboBox.Items.Clear();
+            DatabaseCon dc = new DatabaseCon();
+            List<string> tags = dc.GetTags();
+
+            foreach (string s in tags)
+                this.SubjectTagComboBox.Items.Add(s);
+
+            this.refreshPanel();
+
+            this.SubjectTagComboBox.SelectedIndex = r.TutoredSubject - 1;
+            this.RequestLocationTextbox.Text = r.RequestLocation;
+            this.TutorScheduleDateTimePicker.Value = r.RequestDay;
+            this.StartTimePicker.Value = r.RequestTimeStart;
+            this.EndTimePicker.Value = r.RequestTimeEnd;
+            this.RemarksTextbox.Text = r.Remarks;
+            this.MakeRequestButton.Text = "Edit Request";
+        }
         private void gunaButton1_Click(object sender, EventArgs e)
         {
             DateTime threeDaysAfter = DateTime.Now.AddDays(3).AddHours(-DateTime.Now.Hour).AddMinutes(-DateTime.Now.Minute).AddSeconds(-DateTime.Now.Second).AddMilliseconds(-DateTime.Now.Millisecond);
@@ -55,7 +85,7 @@ namespace Final_Project_EDP.System_UserControls
             {
                 DatabaseCon dc = new DatabaseCon();
 
-                List<string> tags = dc.getTags();
+                List<string> tags = dc.GetTags();
                 int t = 0;
                 foreach (string tag in tags)
                 {
@@ -68,10 +98,18 @@ namespace Final_Project_EDP.System_UserControls
 
                 Request r = new Request(RequestLocationTextbox.Text, TutorScheduleDateTimePicker.Value, StartTimePicker.Value, EndTimePicker.Value, t, accs, this.RemarksTextbox.Text);
 
+                if(this.identifier > 0)
+                {
+                    dc.UpdateRequest(this.identifier, r);
+                    MessageBox.Show("Edit Successful!");
+                }
+                else
+                {
+                    dc.InsertRequest(r);
+                    MessageBox.Show("Request Successful!");
+                }
                 
-                dc.InsertRequest(r);
-                MessageBox.Show("Request Successful!");
-                dc.updateRequestTable(req.RequestTable, this.req.mode, this.req.mf.A.EmailAddress);
+                dc.UpdateRequestTable(req.RequestTable, this.req.mode, this.req.mf.A.EmailAddress, 1);
                 f.Hide();
             }
 
@@ -129,7 +167,7 @@ namespace Final_Project_EDP.System_UserControls
         public void UpdateSearchResult()
         {
             DatabaseCon dc = new DatabaseCon();
-            List<Account> tuts = dc.searchAccount(this.req.mf.A, this.SearchTuteeTextbox.Text);
+            List<Account> tuts = dc.SearchAccount(this.req.mf.A, this.SearchTuteeTextbox.Text);
 
             if (tuts == null)
             {
