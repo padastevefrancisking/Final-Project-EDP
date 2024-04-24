@@ -45,6 +45,7 @@
             this.RequestTable.AllowUserToDeleteRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
             this.RequestTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.RequestTable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.RequestTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.RequestTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.RequestTable.BackgroundColor = System.Drawing.Color.White;
@@ -70,13 +71,13 @@
             this.RequestTable.DefaultCellStyle = dataGridViewCellStyle3;
             this.RequestTable.EnableHeadersVisualStyles = false;
             this.RequestTable.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.RequestTable.Location = new System.Drawing.Point(17, 74);
+            this.RequestTable.Location = new System.Drawing.Point(17, 97);
             this.RequestTable.Name = "RequestTable";
             this.RequestTable.ReadOnly = true;
             this.RequestTable.RowHeadersVisible = false;
             this.RequestTable.RowHeadersWidth = 51;
             this.RequestTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.RequestTable.Size = new System.Drawing.Size(986, 469);
+            this.RequestTable.Size = new System.Drawing.Size(986, 514);
             this.RequestTable.TabIndex = 4;
             this.RequestTable.Theme = Guna.UI.WinForms.GunaDataGridViewPresetThemes.Guna;
             this.RequestTable.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
@@ -104,6 +105,9 @@
             // 
             // AddRequestButton
             // 
+            this.AddRequestButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.AddRequestButton.AnimationHoverSpeed = 0.07F;
             this.AddRequestButton.AnimationSpeed = 0.03F;
             this.AddRequestButton.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
@@ -112,20 +116,23 @@
             this.AddRequestButton.ForeColor = System.Drawing.Color.White;
             this.AddRequestButton.Image = ((System.Drawing.Image)(resources.GetObject("AddRequestButton.Image")));
             this.AddRequestButton.ImageSize = new System.Drawing.Size(20, 20);
-            this.AddRequestButton.Location = new System.Drawing.Point(843, 578);
+            this.AddRequestButton.Location = new System.Drawing.Point(17, 20);
             this.AddRequestButton.Name = "AddRequestButton";
             this.AddRequestButton.OnHoverBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(151)))), ((int)(((byte)(143)))), ((int)(((byte)(255)))));
             this.AddRequestButton.OnHoverBorderColor = System.Drawing.Color.Black;
             this.AddRequestButton.OnHoverForeColor = System.Drawing.Color.White;
             this.AddRequestButton.OnHoverImage = null;
             this.AddRequestButton.OnPressedColor = System.Drawing.Color.Black;
-            this.AddRequestButton.Size = new System.Drawing.Size(160, 42);
+            this.AddRequestButton.Size = new System.Drawing.Size(160, 58);
             this.AddRequestButton.TabIndex = 0;
             this.AddRequestButton.Text = "Add Request";
             this.AddRequestButton.Click += new System.EventHandler(this.AddRequestButton_Click);
             // 
             // RequestListButton
             // 
+            this.RequestListButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.RequestListButton.AnimationHoverSpeed = 0.07F;
             this.RequestListButton.AnimationSpeed = 0.03F;
             this.RequestListButton.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
@@ -134,14 +141,14 @@
             this.RequestListButton.ForeColor = System.Drawing.Color.White;
             this.RequestListButton.Image = ((System.Drawing.Image)(resources.GetObject("RequestListButton.Image")));
             this.RequestListButton.ImageSize = new System.Drawing.Size(20, 20);
-            this.RequestListButton.Location = new System.Drawing.Point(510, 0);
+            this.RequestListButton.Location = new System.Drawing.Point(793, 20);
             this.RequestListButton.Name = "RequestListButton";
             this.RequestListButton.OnHoverBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(151)))), ((int)(((byte)(143)))), ((int)(((byte)(255)))));
             this.RequestListButton.OnHoverBorderColor = System.Drawing.Color.Black;
             this.RequestListButton.OnHoverForeColor = System.Drawing.Color.White;
             this.RequestListButton.OnHoverImage = null;
             this.RequestListButton.OnPressedColor = System.Drawing.Color.Black;
-            this.RequestListButton.Size = new System.Drawing.Size(510, 58);
+            this.RequestListButton.Size = new System.Drawing.Size(210, 58);
             this.RequestListButton.TabIndex = 2;
             this.RequestListButton.Text = "Request List";
             this.RequestListButton.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -149,6 +156,9 @@
             // 
             // PendingRequestsButton
             // 
+            this.PendingRequestsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.PendingRequestsButton.AnimationHoverSpeed = 0.07F;
             this.PendingRequestsButton.AnimationSpeed = 0.03F;
             this.PendingRequestsButton.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
@@ -157,14 +167,14 @@
             this.PendingRequestsButton.ForeColor = System.Drawing.Color.White;
             this.PendingRequestsButton.Image = ((System.Drawing.Image)(resources.GetObject("PendingRequestsButton.Image")));
             this.PendingRequestsButton.ImageSize = new System.Drawing.Size(20, 20);
-            this.PendingRequestsButton.Location = new System.Drawing.Point(0, 0);
+            this.PendingRequestsButton.Location = new System.Drawing.Point(577, 20);
             this.PendingRequestsButton.Name = "PendingRequestsButton";
             this.PendingRequestsButton.OnHoverBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(151)))), ((int)(((byte)(143)))), ((int)(((byte)(255)))));
             this.PendingRequestsButton.OnHoverBorderColor = System.Drawing.Color.Black;
             this.PendingRequestsButton.OnHoverForeColor = System.Drawing.Color.White;
             this.PendingRequestsButton.OnHoverImage = null;
             this.PendingRequestsButton.OnPressedColor = System.Drawing.Color.Black;
-            this.PendingRequestsButton.Size = new System.Drawing.Size(510, 58);
+            this.PendingRequestsButton.Size = new System.Drawing.Size(210, 58);
             this.PendingRequestsButton.TabIndex = 0;
             this.PendingRequestsButton.Text = "Pending Requests";
             this.PendingRequestsButton.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Final_Project_EDP.System_Forms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,11 @@ namespace Final_Project_EDP.System_UserControls
 {
     public partial class Schedules : UserControl
     {
-        public Schedules()
+        private MainForm mf;
+        public Schedules(MainForm mf)
         {
             InitializeComponent();
+            this.mf = mf;
         }
     }
 }

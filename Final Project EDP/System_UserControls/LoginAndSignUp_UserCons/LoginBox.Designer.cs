@@ -41,6 +41,9 @@
             // 
             // LoginHeader
             // 
+            this.LoginHeader.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.LoginHeader.AutoSize = true;
             this.LoginHeader.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LoginHeader.Location = new System.Drawing.Point(189, 31);
@@ -172,7 +175,7 @@
             this.Controls.Add(this.RegisterLabel);
             this.Controls.Add(this.LoginHeader);
             this.Name = "LoginBox";
-            this.Size = new System.Drawing.Size(450, 700);
+            this.Size = new System.Drawing.Size(481, 696);
             this.ResumeLayout(false);
             this.PerformLayout();
 

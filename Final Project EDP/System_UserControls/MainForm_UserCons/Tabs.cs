@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,12 @@ namespace Final_Project_EDP.System_UserControls
             InitializeComponent();
             this.mf = m;
             this.TabsHeaderLabel.Text = "Welcome, " + mf.A.FirstName + " " + mf.A.LastName;
+
+            using (MemoryStream ms = new MemoryStream(this.mf.A.ImagePath)) 
+            {  
+                Image image = Image.FromStream(ms);
+                this.LogoPictureBox.Image = image;
+            }
         }
 
         private void LogoutButton_Click(object sender, EventArgs e)
@@ -43,6 +50,12 @@ namespace Final_Project_EDP.System_UserControls
         {
             mf.getContentPanel().Controls.Clear();
             mf.getContentPanel().Controls.Add(new Requests(mf));
+        }
+
+        private void ScheduleButton_Click(object sender, EventArgs e)
+        {
+            mf.getContentPanel().Controls.Clear();
+            mf.getContentPanel().Controls.Add(new Schedules(mf));
         }
     }
 }

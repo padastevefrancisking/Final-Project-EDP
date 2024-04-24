@@ -45,7 +45,9 @@ namespace Final_Project_EDP.System_UserControls
                 this.SubjectTagComboBox.Items.Add(tag);
 
             this.MakeRequestButton.Text = "Make Request";
-
+            this.TutorScheduleDateTimePicker.Value = DateTime.Now;
+            this.TutorScheduleDateTimePicker.MinDate = DateTime.Now;
+            this.TutorScheduleDateTimePicker.MaxDate = DateTime.Now.AddYears(1);
         }
 
         public RequestFillup(Form f, Requests req, Request r)
@@ -65,7 +67,7 @@ namespace Final_Project_EDP.System_UserControls
 
             this.refreshPanel();
 
-            this.SubjectTagComboBox.SelectedIndex = r.TutoredSubject - 1;
+            this.SubjectTagComboBox.SelectedIndex = r.TutoredSubjects - 1;
             this.RequestLocationTextbox.Text = r.RequestLocation;
             this.TutorScheduleDateTimePicker.Value = r.RequestDay;
             this.StartTimePicker.Value = r.RequestTimeStart;
@@ -96,7 +98,7 @@ namespace Final_Project_EDP.System_UserControls
                     }
                 }
 
-                Request r = new Request(RequestLocationTextbox.Text, TutorScheduleDateTimePicker.Value, StartTimePicker.Value, EndTimePicker.Value, t, accs, this.RemarksTextbox.Text);
+                Request r = new Request(this.req.mf.A, this.RequestLocationTextbox.Text, this.TutorScheduleDateTimePicker.Value, this.StartTimePicker.Value, this.EndTimePicker.Value, t, accs, this.RemarksTextbox.Text);
 
                 if(this.identifier > 0)
                 {

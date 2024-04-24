@@ -19,7 +19,6 @@ namespace Final_Project_EDP.System_UserControls
         {
             InitializeComponent();
             this.CompleteNameLabel.Text = a.ToString();
-            this.UsernameLabel.Text = a.Username;
             this.DegreeProgramLabel.Text = a.DegreeProgram;
             this.a = a;
             this.rf = rf;

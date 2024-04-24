@@ -17,11 +17,7 @@ using Final_Project_EDP.System_UserControls.LoginAndSignUp_UserCons;
 namespace Final_Project_EDP
 {
     public partial class PreMainForm : Form
-    {
-        public LoginBox lb { get; private set; }
-        public SignupBox sb { get; private set; }
-        public ForgotPassword fp { get; private set; }
-
+    { 
         public PreMainForm()
         {
             InitializeComponent();

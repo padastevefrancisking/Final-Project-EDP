@@ -10,12 +10,16 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 using System.Windows.Forms.ComponentModel.Com2Interop;
 using Final_Project_EDP.System_Classes;
 using Final_Project_EDP.System_Enums;
 using Guna.UI.WinForms;
 using MySql.Data;
 using MySql.Data.MySqlClient;
+using System.Drawing;
+using Mysqlx.Crud;
+using System.Data.SqlTypes;
 
 namespace Final_Project_EDP
 {
@@ -36,13 +40,13 @@ namespace Final_Project_EDP
         }
         public bool VerifyLoginInformation(string emailAddress, string password)
         {
-            if (!this.VerifyEmail(emailAddress))
+            if (!this.VerifyEmail(emailAddress) && !this.IsUniqueEmail(emailAddress))
                 return false;
 
             con.Open();
             try
             {
-                string query = "SELECT uEmailAddress, uPassword FROM Account WHERE uEmailAddress = @emailAddress AND uPassword = @password";
+                string query = "SELECT EmailAddress, UserPassword FROM Account WHERE EmailAddress = @emailAddress AND UserPassword = @password";
                 MySqlCommand command = new MySqlCommand(query, con);
                 command.Parameters.AddWithValue("@emailAddress", emailAddress);
                 command.Parameters.AddWithValue("@password", password);
@@ -63,43 +67,28 @@ namespace Final_Project_EDP
             }
             catch (Exception ex)
             {
-                MessageBox.Show("No database connection.");
+                MessageBox.Show(ex.ToString());
                 return false;
             }
         }
         public bool InsertAccount(Account a)
         {
-            if (!this.VerifyEmail(a.EmailAddress))
+            if (!this.VerifyEmail(a.EmailAddress) && !this.IsUniqueEmail(a.EmailAddress))
                 return false;
 
             con.Open();
 
-            string search = "SELECT uEmailAddress FROM Account WHERE uEmailAddress = @emailAddress";
-            MySqlCommand command = new MySqlCommand(search, con);
-
-            command.Parameters.AddWithValue("@emailAddress", a.EmailAddress);
-            MySqlDataAdapter da = new MySqlDataAdapter(command);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
-
-            if (dt.Rows.Count > 0)
-            {
-                MessageBox.Show("Sorry. This email has been used.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                con.Close();
-                return false;
-            }
-
-            string ins = "INSERT INTO Account (firstName, lastName, gender, birthdate, userName, uEmailAddress, uPassword, isAdmin) VALUES (@fName, @lName, @gender, @bday, @userName, @uEmailAddress, @uPassword, @isAdmin)";
+            string ins = "INSERT INTO Account (EmailAddress, FirstName, LastName, ProfilePicture, College, DegreeProgram, YearLevel, UserPassword) VALUES (@email, @fName, @lName, @prof, @college, @degProg, @yearLevel, @pass)";
             MySqlCommand com = new MySqlCommand(ins, con);
 
+            com.Parameters.AddWithValue("@email", a.EmailAddress);
             com.Parameters.AddWithValue("@fName", a.FirstName);
             com.Parameters.AddWithValue("@lName", a.LastName);
-            com.Parameters.AddWithValue("@gender", a.Gender);
-            com.Parameters.AddWithValue("@bday", a.Birthdate);
-            com.Parameters.AddWithValue("@userName", a.Username);
-            com.Parameters.AddWithValue("@uEmailAddress", a.EmailAddress);
-            com.Parameters.AddWithValue("@uPassword", a.Password);
-            com.Parameters.AddWithValue("@isAdmin", a.IsAdmin);
+            com.Parameters.AddWithValue("@prof", a.ImagePath);
+            com.Parameters.AddWithValue("@college", a.College);
+            com.Parameters.AddWithValue("@degProg", a.DegreeProgram);
+            com.Parameters.AddWithValue("@yearLevel", a.YearLevel);
+            com.Parameters.AddWithValue("@pass", a.UserPassword);
 
             com.ExecuteNonQuery();
             con.Close();
@@ -109,30 +98,31 @@ namespace Final_Project_EDP
         {
             if (con.State == ConnectionState.Closed) { con.Open(); }
 
-            string query = "SELECT firstName, lastName, gender, birthdate, userName, uEmailAddress, uPassword FROM Account WHERE uEmailAddress = @emailAddress";
+            string query = "SELECT EmailAddress, FirstName, LastName, ProfilePicture, YearLevel, UserPassword FROM Account WHERE EmailAddress = @emailAddress";
 
             List<Account> accs = new List<Account>();
 
             MySqlCommand com = new MySqlCommand(query, con);
             com.Parameters.AddWithValue("@emailAddress", emailAddress);
 
-            using (MySqlDataReader reader = com.ExecuteReader())
+            using (MySqlDataReader dr = com.ExecuteReader())
             {
-                while (reader.Read())
+                while (dr.Read())
                 {
-                    string fName, lName, uName, email, password;
-                    Gender gender;
-                    DateTime bday;
+                    string email, fName, lName, pass;
+                    int year;
+                    byte[] prof;
 
-                    fName = reader.GetString(0);
-                    lName = reader.GetString(1);
-                    gender = (Gender)(reader.GetInt32(2));
-                    bday = reader.GetDateTime(3);
-                    uName = reader.GetString(4);
-                    email = reader.GetString(5);
-                    password = reader.GetString(6);
 
-                    accs.Add(new Account(fName, lName, gender, bday, uName, email, password));
+                    email = dr.GetString("EmailAddress");
+                    fName = dr.GetString("FirstName");
+                    lName = dr.GetString("LastName");
+                    prof = (byte[])dr["ProfilePicture"];
+                    year = dr.GetInt32("YearLevel");
+                    pass = dr.GetString("UserPassword");
+
+
+                    accs.Add(new Account(email, fName, lName, prof, year, pass));
                 }
 
                 con.Close();
@@ -151,16 +141,17 @@ namespace Final_Project_EDP
             con.Open();
 
             MySqlTransaction t = con.BeginTransaction();
-            string insReq = "INSERT INTO Request (RequestLocation, RequestDay, RequestStartTime, RequestEndTime, TutoredSubject, Remarks, RequestStatus) VALUES (@loc, @day, @start, @end, @subj, @rem, @status)";
+            string insReq = "INSERT INTO Request (RequestLocation, Requestee, RequestDay, RequestStartTime, RequestEndTime, TutoredSubjects, Remarks, RequestStatus) VALUES (@loc, @reqee, @day, @start, @end, @subj, @rem, @rStatus)";
 
             MySqlCommand com1 = new MySqlCommand(insReq, con, t);
             com1.Parameters.AddWithValue("@loc", r.RequestLocation);
+            com1.Parameters.AddWithValue("@reqee", r.Requestee.EmailAddress);
             com1.Parameters.AddWithValue("@day", r.RequestDay);
             com1.Parameters.AddWithValue("@start", r.RequestTimeStart);
             com1.Parameters.AddWithValue("@end", r.RequestTimeEnd);
-            com1.Parameters.AddWithValue("@subj", r.TutoredSubject);
+            com1.Parameters.AddWithValue("@subj", r.TutoredSubjects);
             com1.Parameters.AddWithValue("@rem", r.Remarks);
-            com1.Parameters.AddWithValue("@status", r.RequestStatus);
+            com1.Parameters.AddWithValue("@rStatus", r.RequestStatus);
 
             com1.ExecuteNonQuery();
 
@@ -175,30 +166,30 @@ namespace Final_Project_EDP
             
             for(int i = 0; i < r.Tutees.Count; i++)
             {
-                string insTuts = "INSERT INTO TuteeList (RequestID, TuteeEmail) VALUES (@req, @email)";
+                string insTuts = "INSERT INTO TuteeList (TuteeList_RequestID, TuteeList_TuteeEmail, IsIncluded) VALUES (@req, @email, @isInc)";
                 MySqlCommand com2 = new MySqlCommand(insTuts, con);
                 com2.Parameters.AddWithValue("@req", reqID);
                 com2.Parameters.AddWithValue("@email", r.Tutees[i].EmailAddress);
+                com2.Parameters.AddWithValue("@isInc", true);
 
                 com2.ExecuteNonQuery();
             }
 
             con.Close();
         }
-
         public void UpdateRequestTable(GunaDataGridView dgv, int mode, string email, int rep)
         {
-            con.Open();
+            if (con.State == ConnectionState.Closed) { con.Open(); }
 
             string qry;
             if (mode == 0)
             {
-                qry = "SELECT r.RequestDay AS Schedule, t.TagName AS Subject, r.RequestID AS ID, r.RequestLocation AS Location, CASE WHEN EXISTS ( SELECT 1 FROM TuteeList WHERE RequestID = r.RequestID AND TuteeEmail = @email) AND EXISTS ( SELECT 1 FROM TuteeList WHERE RequestID = r.RequestID ) THEN ( SELECT COUNT(*) FROM TuteeList WHERE RequestID = r.RequestID ) ELSE 0 END AS Tutees, CONCAT(DATE_FORMAT(r.RequestStartTime, '%h:%m'), CASE WHEN HOUR(r.RequestStartTime) < 12 THEN ' AM' ELSE ' PM' END) AS Start, CONCAT(DATE_FORMAT(r.RequestEndTime, '%h:%m'), CASE WHEN HOUR(r.RequestEndTime) < 12 THEN ' AM' ELSE ' PM' END) AS End, r.Remarks AS Remarks, r.RequestStatus as Status FROM Request r INNER JOIN Tags t ON r.TutoredSubject = t.TagsID WHERE r.RequestStatus = 0 ORDER BY r.RequestDay ASC";
+                qry = "SELECT r.RequestID AS ID, r.Requestee AS Requestee, r.RequestDay AS Schedule, t.TagName AS Subject, r.RequestLocation AS Location, (SELECT COUNT(*) FROM TuteeList WHERE TuteeList_RequestID = r.RequestID AND IsIncluded = true) AS Tutees, CONCAT(DATE_FORMAT(r.RequestStartTime, '%h:%m'), CASE WHEN HOUR(r.RequestStartTime) < 12 THEN ' AM' ELSE ' PM' END, \" - \", DATE_FORMAT(r.RequestEndTime, '%h:%m'), CASE WHEN HOUR(r.RequestEndTime) < 12 THEN ' AM' ELSE ' PM' END) AS Time, r.Remarks AS Remarks, r.RequestStatus AS Status FROM Request r LEFT JOIN Tags t ON r.TutoredSubjects = t.TagsID WHERE r.RequestStatus = 0 AND EXISTS ( SELECT 1 FROM TuteeList tl WHERE tl.TuteeList_RequestID = r.RequestID AND tl.IsIncluded = true AND tl.TuteeList_TuteeEmail = @email AND r.RequestStatus = 0) ORDER BY r.RequestDay ASC";
             }
 
             else
             {
-                qry = "SELECT r.RequestID AS ID, r.RequestDay AS Schedule, t.TagName AS Subject, r.RequestLocation AS Location, CASE WHEN EXISTS ( SELECT 1 FROM TuteeList WHERE RequestID = r.RequestID AND TuteeEmail = @email) THEN 0 ELSE ( SELECT COUNT(DISTINCT TuteeEmail) FROM TuteeList WHERE RequestID = r.RequestID ) END AS Tutees, CONCAT(DATE_FORMAT(r.RequestStartTime, '%h:%m'), CASE WHEN HOUR(r.RequestStartTime) < 12 THEN ' AM' ELSE ' PM' END) AS Start, CONCAT(DATE_FORMAT(r.RequestEndTime, '%h:%m'), CASE WHEN HOUR(r.RequestEndTime) < 12 THEN ' AM' ELSE ' PM' END) AS End, r.Remarks AS Remarks, r.RequestStatus as Status FROM Request r INNER JOIN Tags t ON r.TutoredSubject = t.TagsID WHERE r.RequestStatus = 0 ORDER BY r.RequestDay ASC";
+                qry = "SELECT r.RequestID AS ID, r.Requestee AS Requestee, r.RequestDay AS Schedule, t.TagName AS Subject, r.RequestLocation AS Location, (SELECT COUNT(*) FROM TuteeList WHERE TuteeList_RequestID = r.RequestID AND IsIncluded = true) AS Tutees, CONCAT(DATE_FORMAT(r.RequestStartTime, '%h:%m'), CASE WHEN HOUR(r.RequestStartTime) < 12 THEN ' AM' ELSE ' PM' END, \" - \", DATE_FORMAT(r.RequestEndTime, '%h:%m'), CASE WHEN HOUR(r.RequestEndTime) < 12 THEN ' AM' ELSE ' PM' END) AS Time, r.Remarks AS Remarks, r.RequestStatus AS Status FROM Request r LEFT JOIN Tags t ON r.TutoredSubjects = t.TagsID WHERE r.RequestStatus = 0 AND NOT EXISTS ( SELECT 1 FROM TuteeList tl WHERE tl.TuteeList_RequestID = r.RequestID AND tl.IsIncluded = true AND tl.TuteeList_TuteeEmail = @email ) AND NOT EXISTS ( SELECT 1 FROM DenyRequest dr WHERE dr.DenyRequest_RequestID = r.RequestID AND dr.DenyRequest_TuteeEmail = @email AND dr.IsRevoked = 0 ) ORDER BY r.RequestDay ASC";
             }
 
             MySqlCommand cmd = new MySqlCommand(qry, con);
@@ -209,24 +200,26 @@ namespace Final_Project_EDP
                 dgv.Columns.Remove("dgvDetails");
                 dgv.Columns.Remove("dgvEdit");
                 dgv.Columns.Remove("dgvDelete");
+                dgv.Columns.Remove("dgvAccept");
+                dgv.Columns.Remove("dgvDeny");
             }
 
             DataTable dt = new DataTable();
             MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
             adp.Fill(dt);
 
-
             dgv.DataSource = dt;
 
             dgv.Columns["Schedule"].DefaultCellStyle.Format = "dddd, MMM dd";
             dgv.Columns["ID"].Visible = false;
             dgv.Columns["Status"].Visible = false;
-
-
+            dgv.Columns["Requestee"].Visible = false;
 
             DataGridViewButtonColumn dgvDetails = new DataGridViewButtonColumn();
             DataGridViewButtonColumn dgvEdit = new DataGridViewButtonColumn();
             DataGridViewButtonColumn dgvDelete = new DataGridViewButtonColumn();
+            DataGridViewButtonColumn dgvAccept = new DataGridViewButtonColumn();
+            DataGridViewButtonColumn dgvDeny = new DataGridViewButtonColumn();
 
             dgvDetails.Name = "dgvDetails";
             dgvDetails.HeaderText = "";
@@ -249,19 +242,51 @@ namespace Final_Project_EDP
             dgvDelete.FlatStyle = FlatStyle.Popup;
             dgvDelete.UseColumnTextForButtonValue = true;
 
+            dgvAccept.Name = "dgvAccept";
+            dgvAccept.HeaderText = "";
+            dgvAccept.ReadOnly = false;
+            dgvAccept.Text = "Accept";
+            dgvAccept.FlatStyle = FlatStyle.Popup;
+            dgvAccept.UseColumnTextForButtonValue = true;
+
+            dgvDeny.Name = "dgvDeny";
+            dgvDeny.HeaderText = "";
+            dgvDeny.ReadOnly = false;
+            dgvDeny.Text = "Deny";
+            dgvDeny.FlatStyle = FlatStyle.Popup;
+            dgvDeny.UseColumnTextForButtonValue = true;
+
             dgv.Columns.Add(dgvDetails);
             dgv.Columns.Add(dgvEdit);
             dgv.Columns.Add(dgvDelete);
+            dgv.Columns.Add(dgvAccept);
+            dgv.Columns.Add(dgvDeny);
 
+            foreach(DataGridViewColumn daCo in dgv.Columns)
+                daCo.SortMode = DataGridViewColumnSortMode.NotSortable;
+
+            if(mode  == 1)
+            {
+                dgv.Columns["dgvEdit"].Visible = dgv.Columns["dgvDelete"].Visible = false;
+                dgv.Columns["dgvAccept"].Visible = dgv.Columns["dgvDeny"].Visible = true;
+            }
+            else
+            {
+                dgv.Columns["dgvEdit"].Visible = dgv.Columns["dgvDelete"].Visible = true;
+                dgv.Columns["dgvAccept"].Visible = dgv.Columns["dgvDeny"].Visible = false;
+            }
 
             for (int i = dt.Rows.Count - 1; i >= 0; i--)
             {
                 DataRow r = dt.Rows[i];
-                if (r["Tutees"].ToString() == "0")
-                    dt.Rows.Remove(r);
+                if (Convert.ToString(r["Requestee"]) != email)
+                {
+                    dgv["dgvEdit", i].ReadOnly = true;
+                    dgv["dgvEdit", i] = new DataGridViewTextBoxCell();
+                }
+
             }
         }
-
         public int GetTagsID(string TagsName)
         {
             con.Open();
@@ -284,7 +309,6 @@ namespace Final_Project_EDP
             con.Close();
             return r;
         }
-
         public List<string> GetTags()
         {
             con.Open();
@@ -298,15 +322,20 @@ namespace Final_Project_EDP
             while(dr.Read())
                 tags.Add(dr.GetString(0));
 
+            string r = "";
+            foreach (string s in tags)
+                r += s + "\n";
+
+            MessageBox.Show(r);
+
             con.Close();
             return tags;
         }
-
         public int GetNumberOfRequests(Account a)
         {
             con.Open();
 
-            string qry = "SELECT COUNT(*) AS RequestCount FROM TuteeList tl INNER JOIN Request r ON tl.requestID = r.requestID WHERE tl.tuteeEmail = @tEmail";
+            string qry = "SELECT COUNT(*) AS RequestCount FROM TuteeList tl INNER JOIN Request r ON tl.TuteeList_RequestID = r.RequestID WHERE tl.TuteeList_TuteeEmail = @tEmail AND tl.IsIncluded = true AND r.RequestStatus = 0";
 
             MySqlCommand cmd = new MySqlCommand(qry, con);
             cmd.Parameters.AddWithValue("@tEmail", a.EmailAddress);
@@ -324,14 +353,14 @@ namespace Final_Project_EDP
             con.Close();
             return r;
         }
-        public List<Account> SearchAccount(Account a, string username)
+        public List<Account> SearchAccount(Account a, string srchEntry)
         {
             con.Open();
 
-            if (username == string.Empty)
+            if (srchEntry == string.Empty)
                 return null;
 
-            string qry = "SELECT isAdmin, uEmailAddress, firstName, lastName, gender, birthdate, userName, uPassword FROM Account WHERE userName LIKE '%" + username + "%'";
+            string qry = "SELECT EmailAddress, FirstName, LastName, ProfilePicture, YearLevel, UserPassword FROM Account WHERE CONCAT(FirstName, \" \", LastName) LIKE '%" + srchEntry + "%'";
             
             MySqlCommand cmd = new MySqlCommand(qry, con);
 
@@ -340,36 +369,29 @@ namespace Final_Project_EDP
 
             while(dr.Read())
             {
-                bool isAdmin = dr.GetBoolean(0);
+                string email, fName, lName, pass;
+                byte[] prof;
+                int year;
 
-                if (!isAdmin )
-                {
-                    string fName, lName, email, uName, password;
-                    Gender gender;
-                    DateTime bday;
+                email = dr.GetString("EmailAddress");
+                fName = dr.GetString("FirstName");
+                lName = dr.GetString("LastName");
+                prof = (byte[])dr["ProfilePicture"];
+                year = dr.GetInt32("YearLevel");
+                pass = dr.GetString("UserPassword");
 
-                    email = dr.GetString(1);
-                    fName = dr.GetString(2);
-                    lName = dr.GetString(3);
-                    gender = (Gender)(dr.GetInt32(4));
-                    bday = dr.GetDateTime(5);
-                    uName = dr.GetString(6);
-                    password = dr.GetString(7);
-
-                    accs.Add(new Account(fName, lName, gender, bday, uName, email, password));
-                }
+                accs.Add(new Account(email, fName, lName, prof, year, pass));
             }
 
             con.Close();
             return accs;
         }
-
         public bool IsUniqueEmail(string emailAddress)
         {
             con.Open();
             bool res = true;
 
-            string qry = "SELECT uEmailAddress FROM Account WHERE uEmailAddress = @email";
+            string qry = "SELECT EmailAddress FROM Account WHERE EmailAddress = @email";
             MySqlCommand cmd = new MySqlCommand(qry, con);
             cmd.Parameters.AddWithValue("@email", emailAddress);
 
@@ -389,7 +411,7 @@ namespace Final_Project_EDP
             con.Open();
 
             List<string> accEmail = new List<string>();
-            string qryAccs = "SELECT r.*, a.* FROM Request r LEFT JOIN Tuteelist t ON r.RequestID = t.RequestID LEFT JOIN Account a ON t.TuteeEmail = a.uEmailAddress WHERE r.RequestID = @reqID";
+            string qryAccs = "SELECT r.*, a.* FROM Request r LEFT JOIN Tuteelist t ON r.RequestID = t.TuteeList_RequestID LEFT JOIN Account a ON t.TuteeList_TuteeEmail = a.EmailAddress WHERE r.RequestID = @reqID";
 
             MySqlCommand cmd = new MySqlCommand(qryAccs, con);
             cmd.Parameters.AddWithValue("@reqID", reqID);
@@ -399,33 +421,58 @@ namespace Final_Project_EDP
             da.Fill(dt);
 
             foreach(DataRow dr in dt.Rows)
-                accEmail.Add(dr["uEmailAddress"].ToString());
+                accEmail.Add(dr["EmailAddress"].ToString());
 
             if (con.State != ConnectionState.Open)
                 con.Open();
 
             List<Account> accs = new List<Account>();
             foreach (string s in accEmail)
+            {
                 accs.Add(this.GetAccount(s));
+                if (con.State == ConnectionState.Closed) { con.Open(); }
+                MessageBox.Show(this.GetAccount(s).ToString());
+            }
+            DataRow dr2 = dt.Rows[0];
+            Account a = this.GetAccount(Convert.ToString(dr2["Requestee"]));
 
-            Request res = new Request(Convert.ToInt32(dt.Rows[0][0]), dt.Rows[0][1].ToString(), Convert.ToDateTime(dt.Rows[0][2]), Convert.ToDateTime(dt.Rows[0][3]), Convert.ToDateTime(dt.Rows[0][4]), Convert.ToInt32(dt.Rows[0][5]), accs, dt.Rows[0][6].ToString(), (RequestStatus)(dt.Rows[0][7]));
+            if (con.State != ConnectionState.Open)
+                con.Open();
 
+            int req = Convert.ToInt32(dr2["RequestID"]);
+            string loc = Convert.ToString(dr2["RequestLocation"]);
+            DateTime day = Convert.ToDateTime(dr2["RequestDay"]);
+            DateTime st = Convert.ToDateTime(dr2["RequestStartTime"]);
+            DateTime en = Convert.ToDateTime(dr2["RequestEndTime"]);
+            int sub = Convert.ToInt32(dr2["TutoredSubjects"]);
+            string rem = Convert.ToString(dr2["Remarks"]);
+            RequestStatus reS = (RequestStatus)(Convert.ToInt32(dr2["RequestStatus"]));
+
+            MessageBox.Show(a + "\n" + req + "\n" + loc + "\n" + day.ToString() + "\n" + st.ToString() + "\n" + en.ToString() + "\n" + sub + "\n" + rem + reS.ToString());
+
+            Convert.ToString(dr2["RequestLocation"]);
+
+            Request res = new Request(reqID, a, loc, day, st, en, sub, accs, rem, reS);
+
+            
+            MessageBox.Show(res.ToString());
             return res;
         }
         public void UpdateRequest(int reqID, Request edit)
         {
             if (con.State == ConnectionState.Closed) { con.Open(); }
 
-            string updReqQry = "UPDATE Request SET RequestLocation = @reqLoc, RequestDay = @reqDay, RequestStartTime = @reqStart, RequestEndTime = @reqEnd, TutoredSubject = @subj, Remarks = @remarks WHERE RequestID = @reqID";
+            string updReqQry = "UPDATE Request SET RequestLocation = @reqLoc, RequestDay = @reqDay, RequestStartTime = @reqStart, RequestEndTime = @reqEnd, TutoredSubjects = @subj, Remarks = @remarks, RequestStatus = @rStatus WHERE RequestID = @reqID";
 
             MySqlCommand updReqCmd = new MySqlCommand(updReqQry, con);
             updReqCmd.Parameters.AddWithValue("@reqLoc", edit.RequestLocation);
             updReqCmd.Parameters.AddWithValue("@reqDay", edit.RequestDay);
             updReqCmd.Parameters.AddWithValue("@reqStart", edit.RequestTimeStart);
             updReqCmd.Parameters.AddWithValue("@reqEnd", edit.RequestTimeEnd);
-            updReqCmd.Parameters.AddWithValue("@subj", edit.TutoredSubject);
+            updReqCmd.Parameters.AddWithValue("@subj", edit.TutoredSubjects);
             updReqCmd.Parameters.AddWithValue("@remarks", edit.Remarks);
             updReqCmd.Parameters.AddWithValue("@reqID", reqID);
+            updReqCmd.Parameters.AddWithValue("@rStatus", edit.RequestStatus);
 
             updReqCmd.ExecuteNonQuery();
 
@@ -433,6 +480,11 @@ namespace Final_Project_EDP
 
             MySqlCommand tempCmd = new MySqlCommand(tempQry, con);
             tempCmd.ExecuteNonQuery();
+
+            string notIncQry = "UPDATE TuteeList SET IsIncluded = 0 WHERE TuteeList_RequestID = @reqID";
+            MySqlCommand notIncCmd = new MySqlCommand(notIncQry, con);
+            notIncCmd.Parameters.AddWithValue("@reqID", reqID);
+            notIncCmd.ExecuteNonQuery();
 
             foreach (Account a in edit.Tutees)
             {
@@ -443,15 +495,16 @@ namespace Final_Project_EDP
                 insTempCmd.ExecuteNonQuery();
             }
 
-            string updTuteeQry = "INSERT IGNORE INTO TuteeList (RequestID, TuteeEmail) SELECT @reqID AS RequestID, te.TuteeEmail  FROM TempEmails te WHERE NOT EXISTS ( SELECT 1 FROM TuteeList tl  WHERE tl.RequestID = @reqID  AND tl.TuteeEmail = te.TuteeEmail)";
+            string incQry = "UPDATE TuteeList tl SET IsIncluded = CASE WHEN EXISTS (SELECT 1 FROM TempEmails te WHERE te.TuteeEmail = tl.TuteeList_TuteeEmail) THEN 1  ELSE 0 END WHERE tl.TuteeList_RequestID = @reqID";
+            MySqlCommand incCmd = new MySqlCommand(incQry, con);
+            incCmd.Parameters.AddWithValue("@reqID", reqID);
+            incCmd.ExecuteNonQuery();
+
+            string updTuteeQry = "INSERT IGNORE INTO TuteeList (TuteeList_RequestID, IsIncluded, TuteeList_TuteeEmail) SELECT @reqID AS RequestID, @isInc, te.TuteeEmail  FROM TempEmails te WHERE NOT EXISTS ( SELECT 1 FROM TuteeList tl  WHERE tl.TuteeList_RequestID = @reqID  AND tl.TuteeList_TuteeEmail = te.TuteeEmail)";
             MySqlCommand updTuteeCmd = new MySqlCommand(updTuteeQry, con);
             updTuteeCmd.Parameters.AddWithValue("@reqID", reqID);
+            updTuteeCmd.Parameters.AddWithValue("@isInc", true);
             updTuteeCmd.ExecuteNonQuery();
-
-            string delDupsQry = "DELETE FROM TuteeList tl  WHERE RequestID = @reqID  AND tl.TuteeEmail NOT IN (SELECT TuteeEmail FROM TempEmails)";
-            MySqlCommand delDupsCmd = new MySqlCommand(delDupsQry, con);
-            delDupsCmd.Parameters.AddWithValue("@reqID", reqID);
-            delDupsCmd.ExecuteNonQuery();
 
             string drpTempQry = "DROP Table TempEmails";
             MySqlCommand drpTempCmd = new MySqlCommand(drpTempQry, con);
@@ -459,5 +512,202 @@ namespace Final_Project_EDP
 
             con.Close();
         }
+        public void DeleteRequest(Request req)
+        {
+            if(con.State != ConnectionState.Open) { con.Open(); }
+            {
+                req.RequestStatus = RequestStatus.Deleted;
+                this.UpdateRequest(req.RequestID, req);
+
+            }
+
+            if (con.State != ConnectionState.Closed) { con.Close(); }
+        }
+        public void DenyRequest(Request req, Account acc)
+        {
+            if (con.State != ConnectionState.Open) { con.Open(); }
+
+            string dnyQry = "INSERT INTO DenyRequest (DenyRequest_RequestID, DenyRequest_TuteeEmail, IsRevoked) VALUES (@reqID, @email, @isRev)";
+            MySqlCommand dnyCmd = new MySqlCommand(dnyQry, con);
+            dnyCmd.Parameters.AddWithValue("@reqID", req.RequestID);
+            dnyCmd.Parameters.AddWithValue("email", acc.EmailAddress);
+            dnyCmd.Parameters.AddWithValue("@isRev", false);
+
+            dnyCmd.ExecuteNonQuery();
+            if (con.State != ConnectionState.Closed) { con.Close(); };
+        }
+        public void AcceptRequest(Request req, Account acc, string desc, string tRemarks)
+        {
+            try
+            {
+                Schedule s = new Schedule(req, acc, desc, req.RequestLocation, req.RequestDay, req.RequestTimeStart, req.RequestTimeEnd, req.TutoredSubjects, req.Tutees, tRemarks);
+                MessageBox.Show(req.ToString() + "\n" + s.RequestBased + "\n" + req.Requestee + "\n" + s.Tutees[0]);
+
+                if (con.State != ConnectionState.Open) { con.Open(); }
+
+                MySqlTransaction t = con.BeginTransaction();
+                string qry = "INSERT INTO Schedule (Schedule_RequestID, Schedule_TutorEmail, ScheduleDescription, ScheduleLocation, ScheduleDay, ScheduleStartTime, ScheduleEndTime, Subjects, TutorRemarks, ScheduleStatus) VALUES (@sReqID, @sEmail, @desc, @sLoc, @sDay, @sStart, @sEnd, @subj, @tRem, @sStat)";
+
+                MySqlCommand cmd = new MySqlCommand(qry, con, t);
+                cmd.Parameters.AddWithValue("@sReqID", s.RequestBased.RequestID);
+                cmd.Parameters.AddWithValue("@sEmail", s.Tutor.EmailAddress);
+                cmd.Parameters.AddWithValue("@desc", desc);
+                cmd.Parameters.AddWithValue("@sLoc", s.ScheduleLocation);
+                cmd.Parameters.AddWithValue("@sDay", s.ScheduleDay);
+                cmd.Parameters.AddWithValue("@sStart", s.ScheduleTimeStart);
+                cmd.Parameters.AddWithValue("@sEnd", s.ScheduleTimeEnd);
+                cmd.Parameters.AddWithValue("@subj", s.TutoredSubject);
+                cmd.Parameters.AddWithValue("@tRem", s.Remarks);
+                cmd.Parameters.AddWithValue("@sStat", s.ScheduleStatus);
+                cmd.ExecuteNonQuery();
+
+                string lastInsertIdQuery = "SELECT LAST_INSERT_ID()";
+                MySqlCommand lastInsertIdCommand = new MySqlCommand(lastInsertIdQuery, con, t);
+
+                int schedID = Convert.ToInt32(lastInsertIdCommand.ExecuteScalar());
+                s.ScheduleID = schedID;
+
+                t.Commit();
+
+
+
+                for (int i = 0; i < s.Tutees.Count; i++)
+                {
+                    string insTutsQry = "INSERT INTO ScheduleTutee (ScheduleTutee_ScheduleID, ScheduleTutee_TuteeEmail, IsIncluded) VALUES (@sID, @sEmail, @isInc)";
+
+                    MySqlCommand insTutsCmd = new MySqlCommand(insTutsQry, con);
+                    insTutsCmd.Parameters.AddWithValue("@sID", s.ScheduleID);
+                    insTutsCmd.Parameters.AddWithValue("@sEmail", s.Tutees[i].EmailAddress);
+
+                    if (s.Tutees[i] == s.RequestBased.Requestee)
+                        insTutsCmd.Parameters.AddWithValue("@isInc", true);
+                    else
+                        insTutsCmd.Parameters.AddWithValue("@isInc", false);
+
+                    insTutsCmd.ExecuteNonQuery();
+                }
+
+                string updReqQry = "UPDATE Request SET RequestStatus = @reqStat WHERE RequestID = @reqID";
+
+                MySqlCommand cmd2 = new MySqlCommand(updReqQry, con);
+                cmd2.Parameters.AddWithValue("@reqStat", RequestStatus.Accepted);
+                cmd2.Parameters.AddWithValue("@reqID", req.RequestID);
+                cmd2.ExecuteNonQuery();
+
+                if (con.State != ConnectionState.Closed) { con.Close(); }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.ToString()); }
+        }
+        public void UpdateScheduleTable(GunaDataGridView dgv, int mode, string email, int rep)
+        {
+            if (con.State == ConnectionState.Closed) { con.Open(); }
+
+            string qry;
+            if (mode == 0)
+            {
+                qry = "SELECT s.ScheduleID AS ID, s.Schedule_RequestID AS Request, s.Schedule_TutorEmail AS Tutor, s.ScheduleDescription AS Description, s.ScheduleLocation AS Location, s.ScheduleDay AS ScheduleDay, s.ScheduleStartTime AS Start, s.ScheduleEndTime AS End, s.Subjects AS Subjects, s.TutorRemarks AS Remarks, s.ScheduleStatus AS Status, COUNT(DISTINCT st.ScheduleTutee_TuteeEmail) AS TuteeCount FROM Schedule s INNER JOIN ScheduleTutee st ON s.ScheduleID = st.ScheduleTutee_ScheduleID WHERE st.ScheduleTutee_TuteeEmail = @email GROUP BY s.ScheduleID, s.ScheduleDay";
+            }
+
+            else
+            {
+                qry = "SELECT r.RequestID AS ID, r.Requestee AS Requestee, r.RequestDay AS Schedule, t.TagName AS Subject, r.RequestLocation AS Location, (SELECT COUNT(*) FROM TuteeList WHERE TuteeList_RequestID = r.RequestID AND IsIncluded = true) AS Tutees, CONCAT(DATE_FORMAT(r.RequestStartTime, '%h:%m'), CASE WHEN HOUR(r.RequestStartTime) < 12 THEN ' AM' ELSE ' PM' END) AS Start, CONCAT(DATE_FORMAT(r.RequestEndTime, '%h:%m'), CASE WHEN HOUR(r.RequestEndTime) < 12 THEN ' AM' ELSE ' PM' END) AS End,      r.Remarks AS Remarks, r.RequestStatus AS Status FROM Request r LEFT JOIN Tags t ON r.TutoredSubjects = t.TagsID WHERE r.RequestStatus = 0 AND NOT EXISTS ( SELECT 1 FROM TuteeList tl WHERE tl.TuteeList_RequestID = r.RequestID AND tl.IsIncluded = true AND tl.TuteeList_TuteeEmail = @email ) AND NOT EXISTS ( SELECT 1 FROM DenyRequest dr WHERE dr.DenyRequest_RequestID = r.RequestID AND dr.DenyRequest_TuteeEmail = @email AND dr.IsRevoked = 0 ) ORDER BY r.RequestDay ASC";
+            }
+
+            MySqlCommand cmd = new MySqlCommand(qry, con);
+            cmd.Parameters.AddWithValue("@email", email);
+
+            if (rep > 0)
+            {
+                dgv.Columns.Remove("dgvDetails");
+                dgv.Columns.Remove("dgvEdit");
+                dgv.Columns.Remove("dgvDelete");
+                dgv.Columns.Remove("dgvAccept");
+                dgv.Columns.Remove("dgvDeny");
+            }
+
+            DataTable dt = new DataTable();
+            MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
+            adp.Fill(dt);
+
+            dgv.DataSource = dt;
+
+            dgv.Columns["Schedule"].DefaultCellStyle.Format = "dddd, MMM dd";
+            dgv.Columns["ID"].Visible = false;
+            dgv.Columns["Status"].Visible = false;
+            dgv.Columns["Requestee"].Visible = false;
+
+            DataGridViewButtonColumn dgvDetails = new DataGridViewButtonColumn();
+            DataGridViewButtonColumn dgvEdit = new DataGridViewButtonColumn();
+            DataGridViewButtonColumn dgvDelete = new DataGridViewButtonColumn();
+            DataGridViewButtonColumn dgvAccept = new DataGridViewButtonColumn();
+            DataGridViewButtonColumn dgvDeny = new DataGridViewButtonColumn();
+
+            dgvDetails.Name = "dgvDetails";
+            dgvDetails.HeaderText = "";
+            dgvDetails.ReadOnly = false;
+            dgvDetails.Text = "Details";
+            dgvDetails.FlatStyle = FlatStyle.Popup;
+            dgvDetails.UseColumnTextForButtonValue = true;
+
+            dgvEdit.Name = "dgvEdit";
+            dgvEdit.HeaderText = "";
+            dgvEdit.ReadOnly = false;
+            dgvEdit.Text = "Edit";
+            dgvEdit.FlatStyle = FlatStyle.Popup;
+            dgvEdit.UseColumnTextForButtonValue = true;
+
+            dgvDelete.Name = "dgvDelete";
+            dgvDelete.HeaderText = "";
+            dgvDelete.ReadOnly = false;
+            dgvDelete.Text = "Delete";
+            dgvDelete.FlatStyle = FlatStyle.Popup;
+            dgvDelete.UseColumnTextForButtonValue = true;
+
+            dgvAccept.Name = "dgvAccept";
+            dgvAccept.HeaderText = "";
+            dgvAccept.ReadOnly = false;
+            dgvAccept.Text = "Accept";
+            dgvAccept.FlatStyle = FlatStyle.Popup;
+            dgvAccept.UseColumnTextForButtonValue = true;
+
+            dgvDeny.Name = "dgvDeny";
+            dgvDeny.HeaderText = "";
+            dgvDeny.ReadOnly = false;
+            dgvDeny.Text = "Deny";
+            dgvDeny.FlatStyle = FlatStyle.Popup;
+            dgvDeny.UseColumnTextForButtonValue = true;
+
+            dgv.Columns.Add(dgvDetails);
+            dgv.Columns.Add(dgvEdit);
+            dgv.Columns.Add(dgvDelete);
+            dgv.Columns.Add(dgvAccept);
+            dgv.Columns.Add(dgvDeny);
+
+            foreach (DataGridViewColumn daCo in dgv.Columns)
+                daCo.SortMode = DataGridViewColumnSortMode.NotSortable;
+
+            if (mode == 1)
+            {
+                dgv.Columns["dgvEdit"].Visible = dgv.Columns["dgvDelete"].Visible = false;
+                dgv.Columns["dgvAccept"].Visible = dgv.Columns["dgvDeny"].Visible = true;
+            }
+            else
+            {
+                dgv.Columns["dgvEdit"].Visible = dgv.Columns["dgvDelete"].Visible = true;
+                dgv.Columns["dgvAccept"].Visible = dgv.Columns["dgvDeny"].Visible = false;
+            }
+
+            for (int i = dt.Rows.Count - 1; i >= 0; i--)
+            {
+                DataRow r = dt.Rows[i];
+                if (Convert.ToString(r["Requestee"]) != email)
+                {
+                    dgv["dgvEdit", i].ReadOnly = true;
+                    dgv["dgvEdit", i] = new DataGridViewTextBoxCell();
+                }
+
+            }
+        }
+
     }
 }

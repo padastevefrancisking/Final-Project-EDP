@@ -39,18 +39,17 @@
             this.PasswordLabel = new Guna.UI.WinForms.GunaLabel();
             this.RetypePasswordTextbox = new Guna.UI.WinForms.GunaLineTextBox();
             this.RetypePasswordLabel = new Guna.UI.WinForms.GunaLabel();
-            this.GenderLabel = new Guna.UI.WinForms.GunaLabel();
-            this.GenderComboBox = new Guna.UI.WinForms.GunaComboBox();
             this.gunaGradiantButton1 = new Guna.UI.WinForms.GunaGradiantButton();
-            this.BirthdateLabel = new Guna.UI.WinForms.GunaLabel();
-            this.BirthdatePicker = new System.Windows.Forms.DateTimePicker();
-            this.UsernameLabel = new Guna.UI.WinForms.GunaLabel();
-            this.UsernameTextbox = new Guna.UI.WinForms.GunaLineTextBox();
             this.FirstNameTextbox = new Guna.UI.WinForms.GunaLineTextBox();
             this.gunaAdvenceButton1 = new Guna.UI.WinForms.GunaAdvenceButton();
             this.OTPLabel = new Guna.UI.WinForms.GunaLabel();
             this.OTPTextbox = new Guna.UI.WinForms.GunaLineTextBox();
             this.SendOTPButton = new Guna.UI.WinForms.GunaButton();
+            this.YearLevelComboBox = new Guna.UI.WinForms.GunaComboBox();
+            this.YearLevelLabel = new Guna.UI.WinForms.GunaLabel();
+            this.ProfilePictureBox = new Guna.UI.WinForms.GunaPictureBox();
+            this.AddPictureButton = new Guna.UI.WinForms.GunaButton();
+            ((System.ComponentModel.ISupportInitialize)(this.ProfilePictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // SignupHeader
@@ -67,7 +66,7 @@
             // 
             this.FirstNameLabel.AutoSize = true;
             this.FirstNameLabel.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.FirstNameLabel.Location = new System.Drawing.Point(43, 96);
+            this.FirstNameLabel.Location = new System.Drawing.Point(236, 93);
             this.FirstNameLabel.Name = "FirstNameLabel";
             this.FirstNameLabel.Size = new System.Drawing.Size(80, 20);
             this.FirstNameLabel.TabIndex = 1;
@@ -77,7 +76,7 @@
             // 
             this.gunaLabel1.AutoSize = true;
             this.gunaLabel1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.gunaLabel1.Location = new System.Drawing.Point(224, 96);
+            this.gunaLabel1.Location = new System.Drawing.Point(237, 154);
             this.gunaLabel1.Name = "gunaLabel1";
             this.gunaLabel1.Size = new System.Drawing.Size(79, 20);
             this.gunaLabel1.TabIndex = 2;
@@ -90,7 +89,7 @@
             this.LastNameTextbox.FocusedLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
             this.LastNameTextbox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.LastNameTextbox.LineColor = System.Drawing.Color.Gainsboro;
-            this.LastNameTextbox.Location = new System.Drawing.Point(241, 119);
+            this.LastNameTextbox.Location = new System.Drawing.Point(241, 177);
             this.LastNameTextbox.Name = "LastNameTextbox";
             this.LastNameTextbox.PasswordChar = '\0';
             this.LastNameTextbox.Size = new System.Drawing.Size(157, 37);
@@ -103,7 +102,7 @@
             this.EmailAddressTextbox.FocusedLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
             this.EmailAddressTextbox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.EmailAddressTextbox.LineColor = System.Drawing.Color.Gainsboro;
-            this.EmailAddressTextbox.Location = new System.Drawing.Point(47, 248);
+            this.EmailAddressTextbox.Location = new System.Drawing.Point(47, 355);
             this.EmailAddressTextbox.Name = "EmailAddressTextbox";
             this.EmailAddressTextbox.PasswordChar = '\0';
             this.EmailAddressTextbox.Size = new System.Drawing.Size(351, 30);
@@ -113,7 +112,7 @@
             // 
             this.EmailAddressLabel.AutoSize = true;
             this.EmailAddressLabel.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.EmailAddressLabel.Location = new System.Drawing.Point(43, 225);
+            this.EmailAddressLabel.Location = new System.Drawing.Point(43, 332);
             this.EmailAddressLabel.Name = "EmailAddressLabel";
             this.EmailAddressLabel.Size = new System.Drawing.Size(103, 20);
             this.EmailAddressLabel.TabIndex = 5;
@@ -126,7 +125,7 @@
             this.PasswordTextbox.FocusedLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
             this.PasswordTextbox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.PasswordTextbox.LineColor = System.Drawing.Color.Gainsboro;
-            this.PasswordTextbox.Location = new System.Drawing.Point(47, 358);
+            this.PasswordTextbox.Location = new System.Drawing.Point(47, 468);
             this.PasswordTextbox.Name = "PasswordTextbox";
             this.PasswordTextbox.PasswordChar = '●';
             this.PasswordTextbox.Size = new System.Drawing.Size(351, 30);
@@ -137,7 +136,7 @@
             // 
             this.PasswordLabel.AutoSize = true;
             this.PasswordLabel.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.PasswordLabel.Location = new System.Drawing.Point(43, 335);
+            this.PasswordLabel.Location = new System.Drawing.Point(43, 445);
             this.PasswordLabel.Name = "PasswordLabel";
             this.PasswordLabel.Size = new System.Drawing.Size(70, 20);
             this.PasswordLabel.TabIndex = 7;
@@ -150,7 +149,7 @@
             this.RetypePasswordTextbox.FocusedLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
             this.RetypePasswordTextbox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.RetypePasswordTextbox.LineColor = System.Drawing.Color.Gainsboro;
-            this.RetypePasswordTextbox.Location = new System.Drawing.Point(47, 414);
+            this.RetypePasswordTextbox.Location = new System.Drawing.Point(47, 524);
             this.RetypePasswordTextbox.Name = "RetypePasswordTextbox";
             this.RetypePasswordTextbox.PasswordChar = '●';
             this.RetypePasswordTextbox.Size = new System.Drawing.Size(351, 30);
@@ -161,43 +160,11 @@
             // 
             this.RetypePasswordLabel.AutoSize = true;
             this.RetypePasswordLabel.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.RetypePasswordLabel.Location = new System.Drawing.Point(43, 391);
+            this.RetypePasswordLabel.Location = new System.Drawing.Point(43, 501);
             this.RetypePasswordLabel.Name = "RetypePasswordLabel";
             this.RetypePasswordLabel.Size = new System.Drawing.Size(120, 20);
             this.RetypePasswordLabel.TabIndex = 9;
             this.RetypePasswordLabel.Text = "Retype Password";
-            // 
-            // GenderLabel
-            // 
-            this.GenderLabel.AutoSize = true;
-            this.GenderLabel.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.GenderLabel.Location = new System.Drawing.Point(43, 461);
-            this.GenderLabel.Name = "GenderLabel";
-            this.GenderLabel.Size = new System.Drawing.Size(57, 20);
-            this.GenderLabel.TabIndex = 11;
-            this.GenderLabel.Text = "Gender";
-            // 
-            // GenderComboBox
-            // 
-            this.GenderComboBox.BackColor = System.Drawing.Color.Transparent;
-            this.GenderComboBox.BaseColor = System.Drawing.Color.White;
-            this.GenderComboBox.BorderColor = System.Drawing.Color.Silver;
-            this.GenderComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.GenderComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.GenderComboBox.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.GenderComboBox.ForeColor = System.Drawing.Color.Black;
-            this.GenderComboBox.FormattingEnabled = true;
-            this.GenderComboBox.Items.AddRange(new object[] {
-            "Male",
-            "Female",
-            "Others",
-            "Prefer not to say"});
-            this.GenderComboBox.Location = new System.Drawing.Point(47, 495);
-            this.GenderComboBox.Name = "GenderComboBox";
-            this.GenderComboBox.OnHoverItemBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            this.GenderComboBox.OnHoverItemForeColor = System.Drawing.Color.White;
-            this.GenderComboBox.Size = new System.Drawing.Size(142, 31);
-            this.GenderComboBox.TabIndex = 14;
             // 
             // gunaGradiantButton1
             // 
@@ -209,7 +176,7 @@
             this.gunaGradiantButton1.ForeColor = System.Drawing.Color.White;
             this.gunaGradiantButton1.Image = ((System.Drawing.Image)(resources.GetObject("gunaGradiantButton1.Image")));
             this.gunaGradiantButton1.ImageSize = new System.Drawing.Size(20, 20);
-            this.gunaGradiantButton1.Location = new System.Drawing.Point(143, 581);
+            this.gunaGradiantButton1.Location = new System.Drawing.Point(144, 597);
             this.gunaGradiantButton1.Name = "gunaGradiantButton1";
             this.gunaGradiantButton1.OnHoverBaseColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(145)))), ((int)(((byte)(221)))));
             this.gunaGradiantButton1.OnHoverBaseColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(85)))), ((int)(((byte)(255)))));
@@ -221,48 +188,6 @@
             this.gunaGradiantButton1.Text = "Signup";
             this.gunaGradiantButton1.Click += new System.EventHandler(this.gunaGradiantButton1_Click);
             // 
-            // BirthdateLabel
-            // 
-            this.BirthdateLabel.AutoSize = true;
-            this.BirthdateLabel.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.BirthdateLabel.Location = new System.Drawing.Point(237, 461);
-            this.BirthdateLabel.Name = "BirthdateLabel";
-            this.BirthdateLabel.Size = new System.Drawing.Size(70, 20);
-            this.BirthdateLabel.TabIndex = 15;
-            this.BirthdateLabel.Text = "Birthdate";
-            // 
-            // BirthdatePicker
-            // 
-            this.BirthdatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.BirthdatePicker.Location = new System.Drawing.Point(241, 498);
-            this.BirthdatePicker.Name = "BirthdatePicker";
-            this.BirthdatePicker.Size = new System.Drawing.Size(157, 22);
-            this.BirthdatePicker.TabIndex = 16;
-            this.BirthdatePicker.Value = new System.DateTime(2024, 4, 7, 0, 0, 0, 0);
-            // 
-            // UsernameLabel
-            // 
-            this.UsernameLabel.AutoSize = true;
-            this.UsernameLabel.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.UsernameLabel.Location = new System.Drawing.Point(43, 164);
-            this.UsernameLabel.Name = "UsernameLabel";
-            this.UsernameLabel.Size = new System.Drawing.Size(75, 20);
-            this.UsernameLabel.TabIndex = 17;
-            this.UsernameLabel.Text = "Username";
-            // 
-            // UsernameTextbox
-            // 
-            this.UsernameTextbox.BackColor = System.Drawing.Color.White;
-            this.UsernameTextbox.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.UsernameTextbox.FocusedLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            this.UsernameTextbox.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.UsernameTextbox.LineColor = System.Drawing.Color.Gainsboro;
-            this.UsernameTextbox.Location = new System.Drawing.Point(47, 187);
-            this.UsernameTextbox.Name = "UsernameTextbox";
-            this.UsernameTextbox.PasswordChar = '\0';
-            this.UsernameTextbox.Size = new System.Drawing.Size(351, 30);
-            this.UsernameTextbox.TabIndex = 18;
-            // 
             // FirstNameTextbox
             // 
             this.FirstNameTextbox.BackColor = System.Drawing.Color.White;
@@ -270,10 +195,10 @@
             this.FirstNameTextbox.FocusedLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
             this.FirstNameTextbox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.FirstNameTextbox.LineColor = System.Drawing.Color.Gainsboro;
-            this.FirstNameTextbox.Location = new System.Drawing.Point(47, 119);
+            this.FirstNameTextbox.Location = new System.Drawing.Point(240, 116);
             this.FirstNameTextbox.Name = "FirstNameTextbox";
             this.FirstNameTextbox.PasswordChar = '\0';
-            this.FirstNameTextbox.Size = new System.Drawing.Size(147, 37);
+            this.FirstNameTextbox.Size = new System.Drawing.Size(157, 37);
             this.FirstNameTextbox.TabIndex = 19;
             // 
             // gunaAdvenceButton1
@@ -309,7 +234,7 @@
             // 
             this.OTPLabel.AutoSize = true;
             this.OTPLabel.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.OTPLabel.Location = new System.Drawing.Point(43, 281);
+            this.OTPLabel.Location = new System.Drawing.Point(43, 388);
             this.OTPLabel.Name = "OTPLabel";
             this.OTPLabel.Size = new System.Drawing.Size(35, 20);
             this.OTPLabel.TabIndex = 22;
@@ -322,7 +247,7 @@
             this.OTPTextbox.FocusedLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
             this.OTPTextbox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.OTPTextbox.LineColor = System.Drawing.Color.Gainsboro;
-            this.OTPTextbox.Location = new System.Drawing.Point(47, 304);
+            this.OTPTextbox.Location = new System.Drawing.Point(47, 411);
             this.OTPTextbox.Name = "OTPTextbox";
             this.OTPTextbox.PasswordChar = '\0';
             this.OTPTextbox.Size = new System.Drawing.Size(272, 30);
@@ -338,7 +263,7 @@
             this.SendOTPButton.ForeColor = System.Drawing.Color.White;
             this.SendOTPButton.Image = ((System.Drawing.Image)(resources.GetObject("SendOTPButton.Image")));
             this.SendOTPButton.ImageSize = new System.Drawing.Size(20, 20);
-            this.SendOTPButton.Location = new System.Drawing.Point(325, 304);
+            this.SendOTPButton.Location = new System.Drawing.Point(325, 411);
             this.SendOTPButton.Name = "SendOTPButton";
             this.SendOTPButton.OnHoverBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(151)))), ((int)(((byte)(143)))), ((int)(((byte)(255)))));
             this.SendOTPButton.OnHoverBorderColor = System.Drawing.Color.Black;
@@ -350,23 +275,86 @@
             this.SendOTPButton.Text = "Send";
             this.SendOTPButton.Click += new System.EventHandler(this.SendOTPButton_Click);
             // 
+            // YearLevelComboBox
+            // 
+            this.YearLevelComboBox.BackColor = System.Drawing.Color.Transparent;
+            this.YearLevelComboBox.BaseColor = System.Drawing.Color.White;
+            this.YearLevelComboBox.BorderColor = System.Drawing.Color.Silver;
+            this.YearLevelComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.YearLevelComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.YearLevelComboBox.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.YearLevelComboBox.ForeColor = System.Drawing.Color.Black;
+            this.YearLevelComboBox.FormattingEnabled = true;
+            this.YearLevelComboBox.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4"});
+            this.YearLevelComboBox.Location = new System.Drawing.Point(317, 225);
+            this.YearLevelComboBox.Name = "YearLevelComboBox";
+            this.YearLevelComboBox.OnHoverItemBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            this.YearLevelComboBox.OnHoverItemForeColor = System.Drawing.Color.White;
+            this.YearLevelComboBox.Size = new System.Drawing.Size(80, 31);
+            this.YearLevelComboBox.TabIndex = 25;
+            // 
+            // YearLevelLabel
+            // 
+            this.YearLevelLabel.AutoSize = true;
+            this.YearLevelLabel.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.YearLevelLabel.Location = new System.Drawing.Point(236, 230);
+            this.YearLevelLabel.Name = "YearLevelLabel";
+            this.YearLevelLabel.Size = new System.Drawing.Size(75, 20);
+            this.YearLevelLabel.TabIndex = 26;
+            this.YearLevelLabel.Text = "Year Level";
+            // 
+            // ProfilePictureBox
+            // 
+            this.ProfilePictureBox.BaseColor = System.Drawing.Color.White;
+            this.ProfilePictureBox.InitialImage = global::Final_Project_EDP.Properties.Resources.mail_envelope_1024x781;
+            this.ProfilePictureBox.Location = new System.Drawing.Point(47, 116);
+            this.ProfilePictureBox.Name = "ProfilePictureBox";
+            this.ProfilePictureBox.Size = new System.Drawing.Size(170, 170);
+            this.ProfilePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ProfilePictureBox.TabIndex = 27;
+            this.ProfilePictureBox.TabStop = false;
+            // 
+            // AddPictureButton
+            // 
+            this.AddPictureButton.AnimationHoverSpeed = 0.07F;
+            this.AddPictureButton.AnimationSpeed = 0.03F;
+            this.AddPictureButton.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            this.AddPictureButton.BorderColor = System.Drawing.Color.Black;
+            this.AddPictureButton.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.AddPictureButton.ForeColor = System.Drawing.Color.White;
+            this.AddPictureButton.Image = ((System.Drawing.Image)(resources.GetObject("AddPictureButton.Image")));
+            this.AddPictureButton.ImageSize = new System.Drawing.Size(20, 20);
+            this.AddPictureButton.Location = new System.Drawing.Point(66, 293);
+            this.AddPictureButton.Name = "AddPictureButton";
+            this.AddPictureButton.OnHoverBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(151)))), ((int)(((byte)(143)))), ((int)(((byte)(255)))));
+            this.AddPictureButton.OnHoverBorderColor = System.Drawing.Color.Black;
+            this.AddPictureButton.OnHoverForeColor = System.Drawing.Color.White;
+            this.AddPictureButton.OnHoverImage = null;
+            this.AddPictureButton.OnPressedColor = System.Drawing.Color.Black;
+            this.AddPictureButton.Size = new System.Drawing.Size(128, 36);
+            this.AddPictureButton.TabIndex = 28;
+            this.AddPictureButton.Text = "Add Profile";
+            this.AddPictureButton.Click += new System.EventHandler(this.AddPictureButton_Click);
+            // 
             // SignupBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(222)))), ((int)(((byte)(230)))));
+            this.Controls.Add(this.AddPictureButton);
+            this.Controls.Add(this.ProfilePictureBox);
+            this.Controls.Add(this.YearLevelLabel);
+            this.Controls.Add(this.YearLevelComboBox);
             this.Controls.Add(this.SendOTPButton);
             this.Controls.Add(this.OTPTextbox);
             this.Controls.Add(this.OTPLabel);
             this.Controls.Add(this.gunaAdvenceButton1);
             this.Controls.Add(this.FirstNameTextbox);
-            this.Controls.Add(this.UsernameTextbox);
-            this.Controls.Add(this.UsernameLabel);
-            this.Controls.Add(this.BirthdatePicker);
-            this.Controls.Add(this.BirthdateLabel);
-            this.Controls.Add(this.GenderComboBox);
             this.Controls.Add(this.gunaGradiantButton1);
-            this.Controls.Add(this.GenderLabel);
             this.Controls.Add(this.RetypePasswordTextbox);
             this.Controls.Add(this.RetypePasswordLabel);
             this.Controls.Add(this.PasswordTextbox);
@@ -379,6 +367,7 @@
             this.Controls.Add(this.SignupHeader);
             this.Name = "SignupBox";
             this.Size = new System.Drawing.Size(450, 700);
+            ((System.ComponentModel.ISupportInitialize)(this.ProfilePictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -396,17 +385,15 @@
         private Guna.UI.WinForms.GunaLabel PasswordLabel;
         private Guna.UI.WinForms.GunaLineTextBox RetypePasswordTextbox;
         private Guna.UI.WinForms.GunaLabel RetypePasswordLabel;
-        private Guna.UI.WinForms.GunaLabel GenderLabel;
         private Guna.UI.WinForms.GunaGradiantButton gunaGradiantButton1;
-        private Guna.UI.WinForms.GunaComboBox GenderComboBox;
-        private Guna.UI.WinForms.GunaLabel BirthdateLabel;
-        private System.Windows.Forms.DateTimePicker BirthdatePicker;
-        private Guna.UI.WinForms.GunaLabel UsernameLabel;
-        private Guna.UI.WinForms.GunaLineTextBox UsernameTextbox;
         private Guna.UI.WinForms.GunaLineTextBox FirstNameTextbox;
         private Guna.UI.WinForms.GunaAdvenceButton gunaAdvenceButton1;
         private Guna.UI.WinForms.GunaLabel OTPLabel;
         private Guna.UI.WinForms.GunaLineTextBox OTPTextbox;
         private Guna.UI.WinForms.GunaButton SendOTPButton;
+        private Guna.UI.WinForms.GunaComboBox YearLevelComboBox;
+        private Guna.UI.WinForms.GunaLabel YearLevelLabel;
+        private Guna.UI.WinForms.GunaPictureBox ProfilePictureBox;
+        private Guna.UI.WinForms.GunaButton AddPictureButton;
     }
 }

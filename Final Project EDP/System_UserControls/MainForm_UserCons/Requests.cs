@@ -24,6 +24,9 @@ namespace Final_Project_EDP.System_UserControls
             
             DatabaseCon dc = new DatabaseCon();
             dc.UpdateRequestTable(this.RequestTable, 0, mf.A.EmailAddress, 0);
+            this.RequestTable.ReadOnly = true;
+            this.RequestTable.AutoSize = false;
+
         }
 
         private void AddRequestButton_Click(object sender, EventArgs e)
@@ -56,16 +59,21 @@ namespace Final_Project_EDP.System_UserControls
         private void RequestTable_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             
-            if (e.ColumnIndex == this.RequestTable.Columns["dgvDetails"].Index)
+            if (e.ColumnIndex == this.RequestTable.Columns["dgvDetails"].Index && e.RowIndex > -1)
             {
+                DataGridViewCell clickedCell = RequestTable["dgvDetails", e.RowIndex];
+                if (clickedCell is DataGridViewTextBoxCell) { return; }
+
                 DataGridViewRow dgvr = this.RequestTable.Rows[e.RowIndex];
                 DatabaseCon dc = new DatabaseCon();
                 Request r = dc.GetRequest(Convert.ToInt32(dgvr.Cells["ID"].Value));
 
                 MessageBox.Show(r.ToString());
             }
-            else if (e.ColumnIndex == this.RequestTable.Columns["dgvEdit"].Index)
+            else if (e.ColumnIndex == this.RequestTable.Columns["dgvEdit"].Index && e.RowIndex > -1)
             {
+                DataGridViewCell clickedCell = RequestTable["dgvEdit", e.RowIndex];
+                if(clickedCell is DataGridViewTextBoxCell) { return; }
 
                 DataGridViewRow dgvr = this.RequestTable.Rows[e.RowIndex];
                 DatabaseCon dc = new DatabaseCon();
@@ -77,17 +85,47 @@ namespace Final_Project_EDP.System_UserControls
                 rfu.Dock = DockStyle.Fill;
                 f.ShowDialog();
             }
-            else if (e.ColumnIndex == this.RequestTable.Columns["dgvDelete"].Index)
+            else if (e.ColumnIndex == this.RequestTable.Columns["dgvDelete"].Index && e.RowIndex > -1)
             {
-                MessageBox.Show("Hello");
+                DataGridViewCell clickedCell = RequestTable["dgvDetails", e.RowIndex];
+                if (clickedCell is DataGridViewTextBoxCell) { return; }
+
                 DataGridViewRow dgvr = this.RequestTable.Rows[e.RowIndex];
                 DatabaseCon dc = new DatabaseCon();
                 Request r = dc.GetRequest(Convert.ToInt32(dgvr.Cells["ID"].Value));
 
                 r.RequestStatus = System_Enums.RequestStatus.Deleted;
+                dc.DeleteRequest(r);
                 dc.UpdateRequestTable(this.RequestTable, this.mode, this.mf.A.EmailAddress, 1);
             }
 
+            else if (e.ColumnIndex == this.RequestTable.Columns["dgvDeny"].Index && e.RowIndex > -1)
+            {
+                DataGridViewCell clickedCell = RequestTable["dgvDetails", e.RowIndex];
+                if (clickedCell is DataGridViewTextBoxCell) { return; }
+
+                DataGridViewRow dgvr = this.RequestTable.Rows[e.RowIndex];
+                DatabaseCon dc = new DatabaseCon();
+                Request r = dc.GetRequest(Convert.ToInt32(dgvr.Cells["ID"].Value));
+
+                r.RequestStatus = System_Enums.RequestStatus.Deleted;
+                dc.DeleteRequest(r);
+                dc.UpdateRequestTable(this.RequestTable, this.mode, this.mf.A.EmailAddress, 1);
+            }
+
+            else if (e.ColumnIndex == this.RequestTable.Columns["dgvAccept"].Index && e.RowIndex > -1)
+            {
+                MessageBox.Show(e.RowIndex.ToString());
+                DataGridViewCell clickedCell = RequestTable["dgvAccept", e.RowIndex];
+                if (clickedCell is DataGridViewTextBoxCell) { return; }
+
+                DataGridViewRow dgvr = this.RequestTable.Rows[e.RowIndex];
+                DatabaseCon dc = new DatabaseCon();
+                Request r = dc.GetRequest(Convert.ToInt32(dgvr.Cells["ID"].Value));
+
+                dc.AcceptRequest(r, this.mf.A, "Desc", "Remarks");
+                dc.UpdateRequestTable(this.RequestTable, this.mode, this.mf.A.EmailAddress, 1);
+            }
         }
     }
 }

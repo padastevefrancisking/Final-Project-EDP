@@ -25,6 +25,7 @@ namespace Final_Project_EDP.System_UserControls.LoginAndSignUp_UserCons
 
         private void SendOTPButton_Click(object sender, EventArgs e)
         {
+            //Send OTP to Gmail
             DatabaseCon dc = new DatabaseCon();
             if(dc.VerifyEmail(this.ForgotPasswordEmailAddressTextbox.Text)) 
                 this.otp = this.mm.SendOtpToGmail(this.ForgotPasswordEmailAddressTextbox.Text);
@@ -32,6 +33,7 @@ namespace Final_Project_EDP.System_UserControls.LoginAndSignUp_UserCons
 
         private void ForgotPasswordLoginButton_Click(object sender, EventArgs e)
         {
+            //Checks Input of OTP
             DatabaseCon dc = new DatabaseCon();
             if (dc.VerifyEmail(this.ForgotPasswordEmailAddressTextbox.Text) && this.OTPTextBox.Text == this.otp.ToString())
             {

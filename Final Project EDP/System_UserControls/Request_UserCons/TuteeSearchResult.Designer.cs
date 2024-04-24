@@ -30,11 +30,11 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TuteeSearchResult));
             this.TuteeSearchResultBackgroundPanel = new Guna.UI.WinForms.GunaPanel();
+            this.AddAccountButton = new Guna.UI.WinForms.GunaAdvenceButton();
             this.DegreeProgramLabel = new Guna.UI.WinForms.GunaLabel();
             this.UsernameLabel = new Guna.UI.WinForms.GunaLabel();
             this.CompleteNameLabel = new Guna.UI.WinForms.GunaLabel();
             this.ProfilePictureBox = new Guna.UI.WinForms.GunaPictureBox();
-            this.AddAccountButton = new Guna.UI.WinForms.GunaAdvenceButton();
             this.TuteeSearchResultBackgroundPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ProfilePictureBox)).BeginInit();
             this.SuspendLayout();
@@ -51,6 +51,35 @@
             this.TuteeSearchResultBackgroundPanel.Name = "TuteeSearchResultBackgroundPanel";
             this.TuteeSearchResultBackgroundPanel.Size = new System.Drawing.Size(372, 151);
             this.TuteeSearchResultBackgroundPanel.TabIndex = 0;
+            // 
+            // AddAccountButton
+            // 
+            this.AddAccountButton.AnimationHoverSpeed = 0.07F;
+            this.AddAccountButton.AnimationSpeed = 0.03F;
+            this.AddAccountButton.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            this.AddAccountButton.BorderColor = System.Drawing.Color.Black;
+            this.AddAccountButton.CheckedBaseColor = System.Drawing.Color.Gray;
+            this.AddAccountButton.CheckedBorderColor = System.Drawing.Color.Black;
+            this.AddAccountButton.CheckedForeColor = System.Drawing.Color.White;
+            this.AddAccountButton.CheckedImage = ((System.Drawing.Image)(resources.GetObject("AddAccountButton.CheckedImage")));
+            this.AddAccountButton.CheckedLineColor = System.Drawing.Color.DimGray;
+            this.AddAccountButton.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.AddAccountButton.ForeColor = System.Drawing.Color.White;
+            this.AddAccountButton.Image = ((System.Drawing.Image)(resources.GetObject("AddAccountButton.Image")));
+            this.AddAccountButton.ImageSize = new System.Drawing.Size(20, 20);
+            this.AddAccountButton.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(58)))), ((int)(((byte)(170)))));
+            this.AddAccountButton.Location = new System.Drawing.Point(285, 121);
+            this.AddAccountButton.Name = "AddAccountButton";
+            this.AddAccountButton.OnHoverBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(151)))), ((int)(((byte)(143)))), ((int)(((byte)(255)))));
+            this.AddAccountButton.OnHoverBorderColor = System.Drawing.Color.Black;
+            this.AddAccountButton.OnHoverForeColor = System.Drawing.Color.White;
+            this.AddAccountButton.OnHoverImage = null;
+            this.AddAccountButton.OnHoverLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(58)))), ((int)(((byte)(170)))));
+            this.AddAccountButton.OnPressedColor = System.Drawing.Color.Black;
+            this.AddAccountButton.Size = new System.Drawing.Size(75, 14);
+            this.AddAccountButton.TabIndex = 5;
+            this.AddAccountButton.Text = "Add";
+            this.AddAccountButton.Click += new System.EventHandler(this.AddAccountButton_Click);
             // 
             // DegreeProgramLabel
             // 
@@ -104,35 +133,6 @@
             this.ProfilePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.ProfilePictureBox.TabIndex = 0;
             this.ProfilePictureBox.TabStop = false;
-            // 
-            // AddAccountButton
-            // 
-            this.AddAccountButton.AnimationHoverSpeed = 0.07F;
-            this.AddAccountButton.AnimationSpeed = 0.03F;
-            this.AddAccountButton.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            this.AddAccountButton.BorderColor = System.Drawing.Color.Black;
-            this.AddAccountButton.CheckedBaseColor = System.Drawing.Color.Gray;
-            this.AddAccountButton.CheckedBorderColor = System.Drawing.Color.Black;
-            this.AddAccountButton.CheckedForeColor = System.Drawing.Color.White;
-            this.AddAccountButton.CheckedImage = ((System.Drawing.Image)(resources.GetObject("AddAccountButton.CheckedImage")));
-            this.AddAccountButton.CheckedLineColor = System.Drawing.Color.DimGray;
-            this.AddAccountButton.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.AddAccountButton.ForeColor = System.Drawing.Color.White;
-            this.AddAccountButton.Image = ((System.Drawing.Image)(resources.GetObject("AddAccountButton.Image")));
-            this.AddAccountButton.ImageSize = new System.Drawing.Size(20, 20);
-            this.AddAccountButton.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(58)))), ((int)(((byte)(170)))));
-            this.AddAccountButton.Location = new System.Drawing.Point(285, 121);
-            this.AddAccountButton.Name = "AddAccountButton";
-            this.AddAccountButton.OnHoverBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(151)))), ((int)(((byte)(143)))), ((int)(((byte)(255)))));
-            this.AddAccountButton.OnHoverBorderColor = System.Drawing.Color.Black;
-            this.AddAccountButton.OnHoverForeColor = System.Drawing.Color.White;
-            this.AddAccountButton.OnHoverImage = null;
-            this.AddAccountButton.OnHoverLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(58)))), ((int)(((byte)(170)))));
-            this.AddAccountButton.OnPressedColor = System.Drawing.Color.Black;
-            this.AddAccountButton.Size = new System.Drawing.Size(75, 14);
-            this.AddAccountButton.TabIndex = 5;
-            this.AddAccountButton.Text = "Add";
-            this.AddAccountButton.Click += new System.EventHandler(this.AddAccountButton_Click);
             // 
             // TuteeSearchResult
             // 

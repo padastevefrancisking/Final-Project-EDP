@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Final_Project_EDP.System_Enums
 {
-    public enum RequestStatus
+    public enum ScheduleStatus
     {
         Pending,
-        Accepted,
-        Ignored,
-        Deleted
+        Ongoing,
+        Completed,
+        Cancelled
     }
 }

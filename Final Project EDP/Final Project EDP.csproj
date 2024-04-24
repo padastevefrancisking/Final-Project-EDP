@@ -124,6 +124,7 @@
     <Compile Include="System_Classes\Schedule.cs" />
     <Compile Include="System_Enums\Gender.cs" />
     <Compile Include="System_Enums\RequestStatus.cs" />
+    <Compile Include="System_Enums\ScheduleStatus.cs" />
     <Compile Include="System_Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -273,7 +274,7 @@
     <None Include="Resources\tumblr_a04393f37004450c2dd6899d9c887edc_e4c1cda1_540 %281%29.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\LoginBackground.jpg" />
+    <Resource Include="Resources\LoginBackground.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\mail-envelope.1024x781.png" />
