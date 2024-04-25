@@ -52,5 +52,37 @@ namespace Final_Project_EDP.System_Classes
             this.Remarks = remarks;
             this.ScheduleStatus = ScheduleStatus.Pending;
         }
+
+        public override string ToString()
+        {
+            string r = "(" + this.ScheduleID + ") Scheduled ";
+            switch(this.TutoredSubject - 1)
+            {
+                case 0:
+                    r += " Mathematics ";
+                    break;
+                case 1:
+                    r += " Computer Science ";
+                    break;
+                case 2:
+                    r += " Calculus ";
+                    break;
+                case 3:
+                    r += " Physics ";
+                    break;
+                case 4:
+                    r += " English Grammar and Literature ";
+                    break;
+                case 5:
+                    r += " Philippine History and Literature ";
+                    break;
+                default:
+                    r += "Social Sciences";
+                    break;
+            }
+            r += "Tutoring by " + this.Tutor + "\n" + this.ScheduleDescription;
+
+            return r;
+        }
     }
 }

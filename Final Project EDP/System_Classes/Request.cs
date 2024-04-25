@@ -38,6 +38,7 @@ namespace Final_Project_EDP.System_Classes
         public Request(int requestID, Account requestee, string requestLocation, DateTime requestDay, DateTime requestTimeStart, DateTime requestTimeEnd, int tutoredSubject, List<Account> tutees, string remarks, RequestStatus rStatus)
         {
             this.RequestID = requestID;
+            this.Requestee = requestee;
             this.RequestLocation = requestLocation;
             this.RequestDay = requestDay;
             this.RequestTimeStart = requestTimeStart;

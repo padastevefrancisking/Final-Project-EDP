@@ -33,7 +33,7 @@ namespace Final_Project_EDP.System_Classes
 
         public override string ToString()
         {
-            return "Name: " + this.FirstName + " " + this.LastName;
+            return this.FirstName + " " + this.LastName + " (" + this.EmailAddress + ")";
         }
 
         public override bool Equals(object obj)

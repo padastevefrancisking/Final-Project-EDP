@@ -207,6 +207,12 @@
     <Compile Include="System_UserControls\Request_UserCons\TuteeSearchResult.Designer.cs">
       <DependentUpon>TuteeSearchResult.cs</DependentUpon>
     </Compile>
+    <Compile Include="System_UserControls\Schedule_UserControl\TutorSchedules.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="System_UserControls\Schedule_UserControl\TutorSchedules.Designer.cs">
+      <DependentUpon>TutorSchedules.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="System_Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -255,6 +261,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="System_UserControls\Request_UserCons\TuteeSearchResult.resx">
       <DependentUpon>TuteeSearchResult.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System_UserControls\Schedule_UserControl\TutorSchedules.resx">
+      <DependentUpon>TutorSchedules.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
