@@ -203,5 +203,24 @@ namespace Final_Project_EDP.System_UserControls
 
             MessageBox.Show(r);
         }
+
+        private void SoloRequestCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if(this.SoloRequestCheckBox.Checked)
+            {
+                this.accs.Clear();
+                accs.Add(this.req.mf.A);
+                this.SearchTuteeTextbox.Enabled = false;
+                this.SearchTuteeTextbox.Text = string.Empty;
+                this.SearchboxResultPanel.Visible = false;
+
+                this.UpdateSearchResult();
+            }
+
+            else
+            {
+                this.SearchTuteeTextbox.Enabled = true;
+            }
+        }
     }
 }

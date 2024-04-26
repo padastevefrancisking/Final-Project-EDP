@@ -231,6 +231,7 @@
             this.SoloRequestCheckBox.Size = new System.Drawing.Size(111, 20);
             this.SoloRequestCheckBox.TabIndex = 27;
             this.SoloRequestCheckBox.Text = "Solo Request";
+            this.SoloRequestCheckBox.CheckedChanged += new System.EventHandler(this.SoloRequestCheckBox_CheckedChanged);
             // 
             // SearchTuteeTextbox
             // 

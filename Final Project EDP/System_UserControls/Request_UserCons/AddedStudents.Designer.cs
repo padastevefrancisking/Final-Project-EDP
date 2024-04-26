@@ -46,9 +46,9 @@
             this.CompleteNameLabel.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.CompleteNameLabel.Location = new System.Drawing.Point(103, 24);
             this.CompleteNameLabel.Name = "CompleteNameLabel";
-            this.CompleteNameLabel.Size = new System.Drawing.Size(86, 20);
+            this.CompleteNameLabel.Size = new System.Drawing.Size(134, 20);
             this.CompleteNameLabel.TabIndex = 5;
-            this.CompleteNameLabel.Text = "gunaLabel1";
+            this.CompleteNameLabel.Text = "<CompleteName>";
             // 
             // ImageBox
             // 

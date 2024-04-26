@@ -124,11 +124,24 @@
     <Compile Include="System_Classes\Schedule.cs" />
     <Compile Include="System_Enums\Gender.cs" />
     <Compile Include="System_Enums\RequestStatus.cs" />
+    <Compile Include="System_Enums\ScheduleStatus.cs" />
     <Compile Include="System_Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="System_Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System_Forms\Subforms\ScheduleDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System_Forms\Subforms\ScheduleDetails.Designer.cs">
+      <DependentUpon>ScheduleDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System_Forms\Subforms\ScheduleFillUp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System_Forms\Subforms\ScheduleFillUp.Designer.cs">
+      <DependentUpon>ScheduleFillUp.cs</DependentUpon>
     </Compile>
     <Compile Include="System_UserControls\LoginAndSignUp_UserCons\ForgotPassword.cs">
       <SubType>UserControl</SubType>
@@ -158,6 +171,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="System_UserControls\MainForm_UserCons\ProfileContent.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="System_UserControls\MainForm_UserCons\ProfileContent.Designer.cs">
+      <DependentUpon>ProfileContent.cs</DependentUpon>
+    </Compile>
     <Compile Include="System_UserControls\Request_UserCons\AddedStudents.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -206,8 +225,32 @@
     <Compile Include="System_UserControls\Request_UserCons\TuteeSearchResult.Designer.cs">
       <DependentUpon>TuteeSearchResult.cs</DependentUpon>
     </Compile>
+    <Compile Include="System_UserControls\Schedule_UserControl\ScheduleStudents.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="System_UserControls\Schedule_UserControl\ScheduleStudents.Designer.cs">
+      <DependentUpon>ScheduleStudents.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System_UserControls\Schedule_UserControl\TuteeSchedules.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="System_UserControls\Schedule_UserControl\TuteeSchedules.Designer.cs">
+      <DependentUpon>TuteeSchedules.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System_UserControls\Schedule_UserControl\TutorSchedules.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="System_UserControls\Schedule_UserControl\TutorSchedules.Designer.cs">
+      <DependentUpon>TutorSchedules.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="System_Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System_Forms\Subforms\ScheduleDetails.resx">
+      <DependentUpon>ScheduleDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System_Forms\Subforms\ScheduleFillUp.resx">
+      <DependentUpon>ScheduleFillUp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="System_UserControls\LoginAndSignUp_UserCons\ForgotPassword.resx">
       <DependentUpon>ForgotPassword.cs</DependentUpon>
@@ -231,6 +274,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="System_UserControls\MainForm_UserCons\ProfileContent.resx">
+      <DependentUpon>ProfileContent.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="System_UserControls\Request_UserCons\AddedStudents.resx">
       <DependentUpon>AddedStudents.cs</DependentUpon>
     </EmbeddedResource>
@@ -255,6 +301,15 @@
     <EmbeddedResource Include="System_UserControls\Request_UserCons\TuteeSearchResult.resx">
       <DependentUpon>TuteeSearchResult.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="System_UserControls\Schedule_UserControl\ScheduleStudents.resx">
+      <DependentUpon>ScheduleStudents.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System_UserControls\Schedule_UserControl\TuteeSchedules.resx">
+      <DependentUpon>TuteeSchedules.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System_UserControls\Schedule_UserControl\TutorSchedules.resx">
+      <DependentUpon>TutorSchedules.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -273,10 +328,13 @@
     <None Include="Resources\tumblr_a04393f37004450c2dd6899d9c887edc_e4c1cda1_540 %281%29.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\LoginBackground.jpg" />
+    <Resource Include="Resources\LoginBackground.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\mail-envelope.1024x781.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="System_UserControls\Profile_UserCons\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

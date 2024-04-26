@@ -22,10 +22,9 @@ namespace Final_Project_EDP.System_UserControls.Request_UserCons
             this.a = a;
             this.rf = rf;
             if (mode == 1)
-            {
-                this.RemoveTuteeButton.Enabled = false;
                 this.RemoveTuteeButton.Visible = false;
-            }
+
+            this.CompleteNameLabel.Text = a.ToString();
         }
 
         private void gunaCircleButton1_Click(object sender, EventArgs e)
